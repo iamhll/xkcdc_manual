@@ -1,8 +1,8 @@
 
-Introduction
-============
+SW - Introduction
+=================
 
-XKCDC is a interagted C model for H264 encoder, H265 codec and NSTD codec,
+XKCDC-C-Model is an integrated C model for H264 encoder, H265 codec and NSTD codec,
 while sessionTest is a standalone environment for it,
 which could do regression test to check the validity and performance (B-D rate)
 

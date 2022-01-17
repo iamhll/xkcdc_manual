@@ -1,5 +1,5 @@
-Configuration Group
-===================
+SW - Configuration Group
+========================
 
 .. include:: system.rst
 .. include:: top.rst

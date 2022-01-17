@@ -4,8 +4,9 @@ XKCDC MANUAL
 .. toctree::
    :maxdepth: 2
 
-   introduction/main
-   cfgGroup/main
+   SwIntroduction/main
+   SwCfgGroup/main
+   HwIntroduction/main
 
 Version
 -------
@@ -14,8 +15,9 @@ Version
       :align: left
       :widths: auto
 
-      ============ =============
+      ============ =====================================
        Version      Description
-      ============ =============
+      ============ =====================================
        2021.12.13   1st draft
-      ============ =============
+       2022.01.17   hardware related introduction added
+      ============ =====================================
