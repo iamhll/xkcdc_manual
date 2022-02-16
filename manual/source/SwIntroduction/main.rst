@@ -121,3 +121,33 @@ regression run
 
       .. image:: usage_regressionRunBdRate.png
          :width: 40%
+
+Frequently Asked Questions
+--------------------------------
+
+
+    #. | Where to set parameters ?
+       | Parameters can be set in the cfg files (cfgBhv/xkcdc_xxx.cfg, cfgGop/xkcdc_xxx_gopx.cfg), 
+         the command line and the regression script(xkcdc.sh), just pay attention to the order
+         as the same parameters set later will override the parameters set earlier.
+
+    #. | How to configure frame structure ?
+       | Our encoder supports common I/B/P frame structure.
+       | **Intra frame** : set the parameter ``datPrdIntra`` for the modification of the I frame period.
+       | **Inter frame** : set the parameter ``gopSize`` and the corresponding B/P frame reference relationship 
+         in the cfg file (cfgGop/xkcdc_xxx_gopx.cfg) for the modification of the B/P frame structure.
+         The parameter configuration is similar to VTM/HM.
+
+    #. | How to configure QP?
+       | **Intra frame**: set the parameter ``datQpSeq``.
+       | **Inter frame**: set the parameter ``gopDatQpDlt_x``, where ``x`` is the position of the frame in the gop structure.
+
+    #. | How to configure rate control ?
+       | Set the parameter ``r_cFlg_0`` to 1, 
+         and the parameter ``r_cDatBps`` to the target bitrate (kbps).
+
+    #. | How to choose the target level ?
+       | There are corresponding hardware implementations for the 
+         level-main (cfgBhv/xkcdc_main.cfg) and the level-low (cfgBhv/xkcdc_low.cfg).
+         The area and throughput of the level-low is about halved of the level-main 
+         with a BD-rate deterioration of about 5%.
