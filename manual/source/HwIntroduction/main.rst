@@ -116,6 +116,28 @@ Interface
       ======== ================= ============ ============ =============================================
 
 
+
+Integration Consideration
+--------------------------
+    #. **CLOCK**
+
+       There are two clocks ``clk`` and ``clk_e_d``, which are asynchronously processed internally. 
+       The top layer can give asynchronous clocks or synchronous clocks, 
+       but it is recommended that the clock frequency of ``clk_e_d`` be lower.
+
+    #. **SRAM and Standard Cell**
+
+       All SRAMs needed to be replaced are placed under src/enc/enc_mem/XXX_INST. 
+       There is no replacement requirement for standard cells.
+
+    #. **AXI Interface**
+
+       AXI3.0 is used, without different ID and outstanding. The maximum burst length is 
+       ```SIZE_LCU*`DATA_PXL_WD/`ITF_DATA_AXI_DAT_WD``, and other bit width information is 
+       under ``DEFINE FOR ITF`` in defines_enc.vh.
+
+
+
 Register
 --------
 
