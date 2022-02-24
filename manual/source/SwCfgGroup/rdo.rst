@@ -1,2 +1,32 @@
 RDO
 ---
+
+RDO(Rate-Distorion Optimization)
+According to the bit rate cost and the distortion cost brought by the encoding,
+the encoding parameters are selected by a certain computing strategy to achieve the best encoding performance.
+
+Configuration List
+..................
+
+.. table::
+      :align: left
+      :widths: auto
+
+      ============ ======================= ====== =========== ======== =============== =============== =========== ===================================================== ========================================================================================================================================================================================================================================== 
+       domain       name                    size   short key   type     minimum value   maximum value   precision   default value                                         description
+      ============ ======================= ====== =========== ======== =============== =============== =========== ===================================================== ========================================================================================================================================================================================================================================== 
+      rdo          rdoFlgRun               1      /           bool     /               /               /           1                                                     enable flag
+      rdo          rdoFlgRdoq              3x4    /           bool     /               /               /           0 0 0 0 0 0 0 0 0 0 0 0                               enable flags for rdoq (<index> 0/1/2-0/1/2/3: co/cg/lst of intra luma/intra chroma/inter luma/inter chroma)
+      rdo          rdoFlgSkpTsf            4      /           bool     /               /               /           0 0 0 0                                               enable flags for transform skip (<index> 0/1: intra luma/chroma; 2/3 inter luma/chroma)
+      rdo          rdoEnmModLoad           1      /           int      0               2               /           0                                                     load mode (<value> 0: load from pipe; 2. load from file; 3. load random data)
+      rdo          rdoNumMod               1      /           int      1               5               /           3                                                     number of the intra modes to be tested for each PU
+      rdo          rdoDatSclLambda         4      /           double   0               7.96875         5           1.0 0.4 1.0 0.5                                       scaler to bias lambda (<index> 0/1: intra luma/chroma; 2/3 inter luma/chroma)
+      rdo          rdoDatFitICu            2      /           double   0               15.99609375     8           0.70 1.50                                             parameter of intra rate cost's CU part (<index> 0: partition 1Nx1N; 1: partition 2Nx2N)
+      rdo          rdoDatFitIPu            6      /           double   0               15.99609375     8           1.41 0.73 0.75 0.77 1.42 0.80                         parameter of intra rate cost's PU part (<index> 0/1/2/3: luma channel with mpm index -1/0/1/2; 4/5: chroma channel with mpm index -1/0)
+      rdo          rdoDatFitITuS           7      /           double   0               15.99609375     8           2.49 2.52 2.64 2.61 2.70 2.13 1.91                    parameter of intra rate cost's TU part (slope) (<index> 0/1/2/3: luma channel with TU 04/08/16/32; 4/6: chroma channel with TU 04/08/16)
+      rdo          rdoDatFitITuI           7      /           double   -8              7.99609375      8           0.09 -0.01 -0.07 -0.09 0.01 -0.01 -0.01               parameter of intra rate cost's TU part (intercept) (<index> 0/1/2/3: luma channel with TU 04/08/16/32; 4/6: chroma channel with TU 04/08/16)
+      rdo          rdoDatFitPCu            1      /           double   0               15.99609375     8           0.04                                                  parameter of inter rate cost's CU part (<index> 0: partition 2Nx2N)
+      rdo          rdoDatFitPPu            8      /           double   0               15.99609375     8           0.46 2.54 1.27 0.85 0.40 2.56 1.11 0.49               parameter of inter rate cost's PU part (<index> 0: merge flag with value 0; 1: merge flag with value 1; 2/3: mvp index with value A/B; 4/5: merge index with value 0/1; 6/7 slope and intercept of mvd data)
+      rdo          rdoDatFitPTuS           6      /           double   0               15.99609375     8           3.12 2.56 2.27 3.37 2.60 2.05                         parameter of inter rate cost's TU part (slope) (<index> 0: luma channel with TU 08; 1: luma channel with TU 16; 2: luma channel with TU 32; 4: chroma channel with TU 04; 5: chroma channel with TU 08; 6: chroma channel with TU 16)
+      rdo          rdoDatFitPTuI           6      /           double   -8              7.99609375      8           0.00 0.00 0.00 0.00 0.00 0.00                         parameter of inter rate cost's TU part (intercept) (<index> 0: luma channel with TU 08; 1: luma channel with TU 16; 2: luma channel with TU 32; 4: chroma channel with TU 04; 5: chroma channel with TU 08; 6: chroma channel with TU 16)
+      ============ ======================= ====== =========== ======== =============== =============== =========== ===================================================== ========================================================================================================================================================================================================================================== 
