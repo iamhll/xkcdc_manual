@@ -1,12 +1,8 @@
 IME
 ---
 
-IME(Integer Motion Estimation)
-IME searches in the search window by the specified trajectory
-and records the best integer motion vector for all PUs based on the SAD cost
-
-Configuration List
-..................
+The codec supports integer motion estimation (IME), 
+and the best integer motion vector inside the specified search pattern is achieved based on the SAD cost.
 
 .. table::
       :align: left

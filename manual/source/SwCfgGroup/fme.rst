@@ -1,12 +1,9 @@
 FME
 ---
 
-FME(Fractional Motion Estimation)
-FME performs sub-pixel interpolation at the specified motion vector (IMV or MVP) 
-and finds the optimal motion vector based on SATD and MVD cost
-
-Configuration List
-..................
+The codec supports fractional motion estimation (FME), 
+and the best fractional motion vector inside specified centers with 1/2 or 1/4 interpolation
+is achieved based on the SATD and MVD cost.
 
 .. table::
       :align: left
