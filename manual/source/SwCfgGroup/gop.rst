@@ -1,13 +1,8 @@
 GOP
 ---
 
-GOP(Group Of Pictures)
-GOP refers to the distance between two I-frames.
-We can set the size of the GOP, as well as the type of frames in the GOP,
-We can also specify the relative position of the reference frame of each frame and delta qp.
-
-Configuration List
-..................
+The codecs supports common group of pictures (GOP), 
+specifying its size, frame types and relative positions inside, and delta QP for each frame.
 
 .. table::
       :align: left

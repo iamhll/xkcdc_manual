@@ -1,12 +1,8 @@
 RDO
 ---
 
-RDO(Rate-Distorion Optimization)
-According to the bit rate cost and the distortion cost brought by the encoding,
-the encoding parameters are selected by a certain computing strategy to achieve the best encoding performance.
-
-Configuration List
-..................
+The codec supports rate-distorion optimization (RDO), selecting the encoding parameters 
+according to its bit rate cost and the distortion cost by a certain strategy to achieve the best encoding performance.
 
 .. table::
       :align: left

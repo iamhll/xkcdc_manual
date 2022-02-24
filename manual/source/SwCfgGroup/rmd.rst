@@ -1,13 +1,9 @@
 RMD
 ---
 
-RMD(Rough Mode Decision)
-RMD is a fast algorithm for intra mode decision, 
-all modes of all PUs are ordered according to SATD cost.
+The codec supports rough mode decision (RMD) for intra prediction, 
+a fast algorithm for intra mode decision, all modes specified are ordered according to SATD cost.
 In this way, a small number of modes are involved in the final rate-distortion optimization process.
-
-Configuration List
-..................
 
 .. table::
       :align: left

@@ -1,15 +1,12 @@
 ROI
 ---
 
-ROI(Region Of Interest)
-We can circle a specific area from the image in units of LCU, 
-and perform special processing in this area, such as specifying the type of blocks and the QP value of ROI.
-
-Configuration List
-..................
+The codec supports fixed position region of interest (ROI), 
+specifying at most two special areas from the image in the unit of LCU, 
+and setting the type of blocks and QPs for those areas. 
 
 .. table::
-      :align: leftg
+      :align: left
       :widths: auto
 
       ============ ======================= ====== =========== ======== =============== =============== =========== ==================================== ========================================================================= 
