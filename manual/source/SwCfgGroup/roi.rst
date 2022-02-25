@@ -1,9 +1,20 @@
 ROI
 ---
 
-The codec supports fixed position region of interest (ROI), 
-specifying at most two special areas from the image in the unit of LCU, 
-and setting the type of blocks and QPs for those areas. 
+The codec supports region of interest (ROI) interface, 
+specifying at most two areas per frame in the unit of LCU, 
+and setting the blocks type and QP for those areas.
+
+Users can use preprocessing algorithms to select ROI 
+according to different application scenarios.
+
+Example of ROI with default settings is shown below.
+
+
+.. image:: roi.png
+    :width: 10%
+
+
 
 .. table::
       :align: left
