@@ -125,10 +125,31 @@ Integration Consideration
        The top layer can give asynchronous clocks or synchronous clocks, 
        but it is recommended that the clock frequency of ``clk_e_d`` be lower.
 
-    #. **SRAM and Standard Cell**
+    #. **Standard Cell and Memory**
 
-       All SRAMs needed to be replaced are placed under src/enc/enc_mem/XXX_INST. 
        There is no replacement requirement for standard cells.
+
+       The logical memory used is shown below.
+       In the type column, ``sram_sp_behave`` refers to single port, 
+       ``sram_sp_be_behave`` refers to single port with bit enable,
+       ``sram_tp_behave`` and ``fifo`` refer to pseudo dual port. 
+       Besides, ``sizeMem`` refers to depth while ``dataMemWd`` refers to width.
+
+       .. image:: mem_logical.png
+         :width: 60%
+
+       The four physical memories placed by default are shown below. 1. 
+       Behavioral model 2. FPGA model 3. GF22 model 4. GF28 model. 
+       The switch is in include/define.vh, the behavior model is enabled by default, 
+       and the behavior model under lib/behave is called; 
+       The other three models are FPGA_INST, GF_22_INST and GF_28_INST under src/enc/enc_mem. 
+       Only the model of FPGA_INST is provided, all files with the suffix ``v`` are models, 
+       and all files with the suffix ``vh`` are instantiation. 
+       Meanwhile, there is no split inside, only a piece of memory is instantiated.
+       Only files with the suffix ``vh`` need to be replaced in the code. 
+
+       .. image:: mem_physical.png
+         :width: 60%
 
     #. **AXI Interface**
 
