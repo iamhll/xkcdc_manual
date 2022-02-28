@@ -160,11 +160,11 @@ ilf,ilfFlgSao,open,2,/,bool,/,/,/,1 1,enable flag for feature SAO (<index> 0: lu
 ilf,ilfDatOffBtDiv2,open,1,/,int,-6,6,/,0,parameter BetaOffsetDiv2 for feature DBF,Yes,same with H265-main,?
 ilf,ilfDatOffTcDiv2,open,1,/,int,-6,6,/,0,parameter   TcOffsetDiv2 for feature DBF,Yes,same with H265-main,?
 ilf,ilfDatSclLmd,close,4,/,double,0,7.96875,5,1.0 0.4 1.0 0.5,scaler to bias lambda (<index> 0/1: intra luma/chroma; 2/3 inter luma/chroma),/,same with H265-main,same with H265-main
-e_c,e_cFlgRun,close,1,/,bool,/,/,/,1,enable flag,,,
-e_c,e_cFlgSbh,close,1,/,bool,/,/,/,0,enable flag for sign bit hidden,,,
-e_c,e_cEnmModLoad,close,1,/,int,0,2,/,0,load mode (<value> 0: load from pipe; 1. load from file; 2. load random data),,,
-e_d,e_dFlgRun,close,1,/,bool,/,/,/,1,enable flag,,,
-e_d,e_dEnmModLoad,close,1,/,int,0,2,/,0,load mode (<value> 0: load from pipe; 1. load from file; 2. load random data),,,
+e_c,e_cFlgRun,close,1,/,bool,/,/,/,1,enable flag,Yes,Yes,Yes
+e_c,e_cFlgSbh,close,1,/,bool,/,/,/,0,enable flag for sign bit hidden,/,/,/
+e_c,e_cEnmModLoad,close,1,/,int,0,2,/,0,load mode (<value> 0: load from pipe; 1. load from file; 2. load random data),Yes,Yes,Yes
+e_d,e_dFlgRun,close,1,/,bool,/,/,/,1,enable flag,Yes,Yes,Yes
+e_d,e_dEnmModLoad,close,1,/,int,0,2,/,0,load mode (<value> 0: load from pipe; 1. load from file; 2. load random data),Yes,Yes,Yes
 itf,itfFlgRfc,close,1,/,bool,/,/,/,0,enable flag for feature RFC,,,
 dump,dmpEnmLvlTop,close,1,/,int,/,/,/,0,dump level of TOP related test vector,,,
 dump,dmpEnmLvlRmd,close,1,/,int,/,/,/,0,dump level of RMD related test vector,,,
