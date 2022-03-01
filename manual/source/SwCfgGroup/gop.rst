@@ -4,6 +4,9 @@ GOP
 The codecs supports common group of pictures (GOP), 
 specifying its size, frame types and relative positions inside, and delta QP for each frame.
 
+.. image:: GOP.png
+      :width: 20%
+
 .. table::
       :align: left
       :widths: auto
