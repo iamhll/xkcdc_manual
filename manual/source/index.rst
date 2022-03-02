@@ -5,6 +5,7 @@ XKCDC MANUAL
    :maxdepth: 2
 
    SwIntroduction/main
+   SwArchitecture/main
    SwCfgGroup/main
    HwIntroduction/main
 
