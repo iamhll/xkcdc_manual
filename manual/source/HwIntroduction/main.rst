@@ -236,16 +236,25 @@ Register
        FTH     DAT_SRC_ORI      025      1       R, W         no     no       
        \       SIZ_REF_Y        026      5       R, W         no     no       
 
-       RMD     NUM_GRP          027      4       R, W         no     no       
-       \       DAT_MOD_A        028      18      R, W         no     no       
-       \       DAT_MOD_B        029      18      R, W         no     no       
-       \       DAT_MOD_C        030      18      R, W         no     no       
-       \       DAT_MOD_D        031      18      R, W         no     no       
-       \       DAT_MOD_E        032      18      R, W         no     no       
-       \       DAT_MOD_F        033      18      R, W         no     no       
-       \       DAT_MOD_G        034      18      R, W         no     no       
-       \       DAT_MOD_H        035      18      R, W         no     no       
-       \       DAT_MOD_I        036      18      R, W         no     no       
+       RMD     NUM_GRP          027      4       R, W         no     no       the number of groups of search modes that RMD needs to process
+       \                                                                      n: RMD needs to search the first (n + 1) groups of modes, n belongs to [0,12]
+       \       DAT_MOD_A        028      18      R, W         no     no       the 5n~(5n+4) search mode to be processed by RMD, where n = 0
+       \                                                                      bit 29:24 : nth search mode (x: The search mode is x, where x belongs to [0, 34] and {63})
+       \                                                                      bit 23:18 : (n+1)th search mode
+       \                                                                      bit 17:12 : (n+2)th search mode 
+       \                                                                      bit 11:06 : (n+3)th search mode
+       \                                                                      bit 05:00 : (n+4)th search mode
+       \                                                                      three modes is a group, and modes 0, 1, 10 and 26 can only appear in position 0 of each group
+       \                                                                      three modes of the same group must belong only to [2, 17] or belong to {0, 1} and [18, 34]
+       \                                                                      if the mode value is 63, the mode does not participate in the search process
+       \       DAT_MOD_B        029      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 1, other definitions are as above
+       \       DAT_MOD_C        030      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 2, other definitions are as above
+       \       DAT_MOD_D        031      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 3, other definitions are as above
+       \       DAT_MOD_E        032      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 4, other definitions are as above
+       \       DAT_MOD_F        033      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 5, other definitions are as above
+       \       DAT_MOD_G        034      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 6, other definitions are as above
+       \       DAT_MOD_H        035      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 7, other definitions are as above
+       \       DAT_MOD_I        036      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 8, other definitions are as above
 
        IME     NUM_PTN          037      3       R, W         no     no       
        \       DAT_PTN_0        038      30      R, W         no     no       
@@ -266,43 +275,52 @@ Register
        \       DAT_SCL_MVD      052      8       R, W         no     no       
        \       DAT_DLY          053      33      R, W         no     no       
 
-       RDO     FLG_PRT          054      1       R, W         no     no       
-       \       FLG_ADD_LU_01    055      1       R, W         no     no       
-       \       FLG_SET_CH_36    056      1       R, W         no     no       
-       \       NUM_MOD          057      2       R, W         no     no       
-       \       DAT_SCL          058      32      R, W         no     no       
-       \       DAT_FIT_I_CU_0   059      14      R, W         no     no       
-       \       DAT_FIT_I_CU_1   060      14      R, W         no     no       
-       \       DAT_FIT_I_PU_0   061      14      R, W         no     no       
-       \       DAT_FIT_I_PU_1   062      14      R, W         no     no       
-       \       DAT_FIT_I_PU_2   063      14      R, W         no     no       
-       \       DAT_FIT_I_PU_3   064      14      R, W         no     no       
-       \       DAT_FIT_I_PU_4   065      14      R, W         no     no       
-       \       DAT_FIT_I_PU_5   066      14      R, W         no     no       
-       \       DAT_FIT_I_TU_0   067      28      R, W         no     no       
-       \       DAT_FIT_I_TU_1   068      28      R, W         no     no       
-       \       DAT_FIT_I_TU_2   069      28      R, W         no     no       
-       \       DAT_FIT_I_TU_3   070      28      R, W         no     no       
-       \       DAT_FIT_I_TU_4   071      28      R, W         no     no       
-       \       DAT_FIT_I_TU_5   072      28      R, W         no     no       
-       \       DAT_FIT_I_TU_6   073      28      R, W         no     no       
-       \       DAT_FIT_P_CU_0   074      14      R, W         no     no       
-       \       DAT_FIT_P_PU_0   075      14      R, W         no     no       
-       \       DAT_FIT_P_PU_1   076      14      R, W         no     no       
-       \       DAT_FIT_P_PU_2   077      14      R, W         no     no       
-       \       DAT_FIT_P_PU_3   078      14      R, W         no     no       
-       \       DAT_FIT_P_PU_4   079      14      R, W         no     no       
-       \       DAT_FIT_P_PU_5   080      14      R, W         no     no       
-       \       DAT_FIT_P_PU_6   081      14      R, W         no     no       
-       \       DAT_FIT_P_TU_0   082      14      R, W         no     no       
-       \       DAT_FIT_P_TU_1   083      14      R, W         no     no       
-       \       DAT_FIT_P_TU_2   084      14      R, W         no     no       
-       \       DAT_FIT_P_TU_3   085      14      R, W         no     no       
-       \       DAT_FIT_P_TU_4   086      14      R, W         no     no       
-       \       DAT_FIT_P_TU_5   087      14      R, W         no     no       
-       \       DAT_DLY_08       088      5       R, W         no     no       
-       \       DAT_DLY_16       089      8       R, W         no     no       
-       \       DAT_DLY_32       090      9       R, W         no     no       
+       RDO     FLG_PRT          054      1       R, W         no     no       enable flag for RDO adopts pre-stage partition, high active
+       \       FLG_ADD_LU_01    055      1       R, W         no     no       enable flag for RDO additionally tests modes 0 and 1 for luma, high active
+       \       FLG_SET_CH_36    056      1       R, W         no     no       enable flag for RDO forced chroma mode to 36, high active
+       \       NUM_MOD          057      2       R, W         no     no       rough number of modes that RDO needs to process
+       \                                                                      n: RDO needs to process the first (n + 1) rough modes
+       \                                                                      n belongs to [0, 2]
+       \       DAT_SCL          058      32      R, W         no     no       Lambda scaling factor during stage RDO
+       \                                                                      bit 31:24 : I-frame luma channel (x: Lambda scaled to x / 32 times)
+       \                                                                      bit 23:16 : I-frame chroma channel 
+       \                                                                      bit 15:08 : P-frame luma channel 
+       \                                                                      bit 07:00 : P-frame chroma channel
+       \       DAT_FIT_I_CU_0   059      14      R, W         no     no       parameter to calculate CU fitting RCst when size equals to 4 for luma channel in I-block
+       \       DAT_FIT_I_CU_1   060      14      R, W         no     no       parameter to calculate CU fitting RCst when size equals to 8 for luma channel in I-block
+       \       DAT_FIT_I_PU_0   061      14      R, W         no     no       parameter to calculate PU fitting RCst when idxMpm equals to -1 for luma channel in I-block
+       \       DAT_FIT_I_PU_1   062      14      R, W         no     no       parameter to calculate PU fitting RCst when idxMpm equals to 0 for luma channel in I-block
+       \       DAT_FIT_I_PU_2   063      14      R, W         no     no       parameter to calculate PU fitting RCst when idxMpm equals to 1 for luma channel in I-block
+       \       DAT_FIT_I_PU_3   064      14      R, W         no     no       parameter to calculate PU fitting RCst when idxMpm equals to 2 for luma channel in I-block
+       \       DAT_FIT_I_PU_4   065      14      R, W         no     no       parameter to calculate PU fitting RCst when idxMpm equals to -1 for chroma channel in I-block
+       \       DAT_FIT_I_PU_5   066      14      R, W         no     no       parameter to calculate PU fitting RCst when idxMpm equals to 0 for chroma channel in I-block
+       \       DAT_FIT_I_TU_0   067      28      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 4 for luma in I-block
+       \       DAT_FIT_I_TU_1   068      28      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 8 for luma in I-block
+       \       DAT_FIT_I_TU_2   069      28      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 16 for luma in I-block
+       \       DAT_FIT_I_TU_3   070      28      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 32 for luma in I-block
+       \       DAT_FIT_I_TU_4   071      28      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 4 for chroma in I-block
+       \       DAT_FIT_I_TU_5   072      28      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 8 for chroma in I-block
+       \       DAT_FIT_I_TU_6   073      28      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 16 for chroma in I-block
+       \       DAT_FIT_P_CU_0   074      14      R, W         no     no       parameter to calculate CU fitting RCst for luma channel in P-block
+       \       DAT_FIT_P_PU_0   075      14      R, W         no     no       parameter to calculate PU flgMrg fitting RCst when flgMrg equals to 0 in P-block
+       \       DAT_FIT_P_PU_1   076      14      R, W         no     no       parameter to calculate PU flgMrg fitting RCst when flgMrg equals to 1 in P-block
+       \       DAT_FIT_P_PU_2   077      14      R, W         no     no       parameter to calculate PU idxMvp fitting RCst when idxMvp equals to 0 in P-block
+       \       DAT_FIT_P_PU_3   078      14      R, W         no     no       parameter to calculate PU idxMvp fitting RCst when idxMvp equals to 1 in P-block
+       \       DAT_FIT_P_PU_4   079      14      R, W         no     no       parameter to calculate PU idxMrg fitting RCst when idxMrg equals to 0 in P-block
+       \       DAT_FIT_P_PU_5   080      14      R, W         no     no       parameter to calculate PU idxMrg fitting RCst when idxMrg equals to 1 or 2 in P-block
+       \       DAT_FIT_P_PU_6   081      14      R, W         no     no       parameter to calculate PU mvd fitting RCst in P-block
+       \       DAT_FIT_P_TU_0   082      14      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 8 for luma in P-block
+       \       DAT_FIT_P_TU_1   083      14      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 16 for luma in P-block
+       \       DAT_FIT_P_TU_2   084      14      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 32 for luma in P-block
+       \       DAT_FIT_P_TU_3   085      14      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 4 for chroma in P-block
+       \       DAT_FIT_P_TU_4   086      14      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 8 for chroma in P-block
+       \       DAT_FIT_P_TU_5   087      14      R, W         no     no       parameter to calculate TU fitting RCst when size equals to 16 for chroma in P-block
+       \       DAT_DLY_08       088      5       R, W         no     no       startup delay between each 08x08 block of RDO
+       \                                                                      n: delay n cycles to start, n belongs to [0, 19]
+       \       DAT_DLY_16       089      8       R, W         no     no       startup delay between each 16x16 block of RDO
+       \                                                                      n: delay n cycles to start, n belongs to [0, 69]
+       \       DAT_DLY_32       090      9       R, W         no     no       startup delay between each 32x32 block of RDO
+       \                                                                      n: delay n cycles to start, n belongs to [0, 349]
 
        ILF     FLG_DBF          091      1       R, W         no     no       enable flag for deblocking filter, high active
        \       FLG_SAO          092      2       R, W         no     no       enable flag for sample adaptive offset, high active
