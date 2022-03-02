@@ -332,24 +332,52 @@ Register
        \                                                                      bit 07:00 -> luma channel of intra frame
        \                                                                      value x: lambda is scaled to x of thirty two
 
-       IIP     FLG              096      1       R, W         no     no       
-       \       DAT_SCL_ON_QP_0  097      32      R, W         no     no       
-       \       DAT_SCL_ON_QP_1  098      32      R, W         no     no       
-       \       DAT_SCL_ON_QP_2  099      32      R, W         no     no       
-       \       DAT_SCL_ON_QP_3  100      16      R, W         no     no       
-       \       DAT_SCL_ON_MV_0  101      32      R, W         no     no       
-       \       DAT_SCL_ON_MV_1  102      8       R, W         no     no       
+       IIP     FLG              096      1       R, W         no     no       enable flag for IIP, high active
+       \       DAT_SCL_ON_QP_0  097      32      R, W         no     no       the (4n~4n+3)th scaling factor of the IIP process based on QP, here n = 0
+       \                                                                      bit 31-24: the (4n)th scaling factor , x: the corresponding rate cost scaling is x/32
+       \                                                                      bit 23-16: the (4n+1)th scaling factor
+       \                                                                      bit 15-08: the (4n+2)th scaling factor
+       \                                                                      bit 07-00: the (4n+3)th scaling factor
+       \                                                                      the 0th to 12th scaling factors correspond to the cases when the QP belongs to 0~19, 20~21, 22~23, 24~25, 26~27, 28~29, 30~31, 32~33, 34~35, 36~37, 38~39, 40~41, 42~43, 44~51 and act on the rate cost block of the I block
+       \       DAT_SCL_ON_QP_1  098      32      R, W         no     no       the (4n~4n+3)th scaling factor of the IIP process based on QP, here n = 1 , other ibid
+       \       DAT_SCL_ON_QP_2  099      32      R, W         no     no       the (4n~4n+3)th scaling factor of the IIP process based on QP, here n = 2 , other ibid
+       \       DAT_SCL_ON_QP_3  100      16      R, W         no     no       the 12th~13th scaling factor of the IIP process based on qp
+       \                                                                      bit 15-08: the 12th scaling factor
+                                                                              bit 07-00: the 13th scaling factor
+       \       DAT_SCL_ON_MV_0  101      32      R, W         no     no       the (4n~4n+3)th scaling factor of the IIP process based on MV, here n = 0
+       \                                                                      bit 31-24: the (4n)th scaling factor, x: the corresponding rate cost scaling is x/32
+       \                                                                      bit 23-16: the (4n+1)th scaling factor
+       \                                                                      bit 15-08: the (4n+2)th scaling factor
+       \                                                                      bit 07-00: the (4n+3)th scaling factor
+       \                                                                      the 0th to 12th scaling factors correspond to the cases when the abs of FMV belongs to 0~7，8~15，16~23，24~31，31~inf and act on the rate cost block of the I block
+       \       DAT_SCL_ON_MV_1  102      8       R, W         no     no       the 4th scaling factor of the IIP process based on MV
+       \                                                                      bit 07-00: the 4th scaling factor
 
-       MRG     FLG              103      1       R, W         no     no       
+       MRG     FLG              103      1       R, W         no     no       enable flag for MRG, high active
 
-       SKP     FLG              104      1       R, W         no     no       
-       \       DAT_SCL_ON_CHN   105      16      R, W         no     no       
-       \       DAT_SCL_ON_QP_0  106      32      R, W         no     no       
-       \       DAT_SCL_ON_QP_1  107      32      R, W         no     no       
-       \       DAT_SCL_ON_QP_2  108      32      R, W         no     no       
-       \       DAT_SCL_ON_QP_3  109      16      R, W         no     no       
-       \       DAT_SCL_ON_MV_0  110      32      R, W         no     no       
-       \       DAT_SCL_ON_MV_1  111      8       R, W         no     no       
+       SKP     FLG              104      1       R, W         no     no       enable flag for SKP, high active
+       \       DAT_SCL_ON_CHN   105      16      R, W         no     no       the scaling factor of the SKP process based on CHN
+       \                                                                      bit 15-08: the scaling factor of chroma channal, x: the corresponding rate cost scaling is x/32
+       \                                                                      bit 15-08: the scaling factor of luma channal
+       \       DAT_SCL_ON_QP_0  106      32      R, W         no     no       the (4n~4n+3)th scaling factor of the SKP process based on QP, here n = 0
+       \                                                                      bit 31-24: the (4n)th scaling factor, x: the corresponding rate cost scaling is x/32
+       \                                                                      bit 23-16: the (4n+1)th scaling factor
+       \                                                                      bit 15-08: the (4n+2)th scaling factor
+       \                                                                      bit 07-00: the (4n+3)th scaling factor
+       \                                                                      the 0th to 12th scaling factors correspond to the cases when the QP belongs to 0~19, 20~21, 22~23, 24~25, 26~27, 28~29, 30~31, 32~33, 34~35, 36~37, 38~39, 40~41, 42~43, 44~51 and act on the TU rate cost of non-SKP blocks
+       \       DAT_SCL_ON_QP_1  107      32      R, W         no     no       the (4n~4n+3)th scaling factor of the SKP process based on QP, here n = 1 , other ibid
+       \       DAT_SCL_ON_QP_2  108      32      R, W         no     no       the (4n~4n+3)th scaling factor of the SKP process based on QP, here n = 2 , other ibid
+       \       DAT_SCL_ON_QP_3  109      16      R, W         no     no       the 12th~13th scaling factor of the SKP process based on qp
+       \                                                                      bit 15-08: the 12th scaling factor
+       \                                                                      bit 07-00: the 13th scaling factor
+       \       DAT_SCL_ON_MV_0  110      32      R, W         no     no       the (4n~4n+3)th scaling factor of the SKP process based on MV, here n = 0
+       \                                                                      bit 31-24: the (4n)th scaling factor, x: the corresponding rate cost scaling is x/32
+       \                                                                      bit 23-16: the (4n+1)th scaling factor
+       \                                                                      bit 15-08: the (4n+2)th scaling factor
+       \                                                                      bit 07-00: the (4n+3)th scaling factor
+       \                                                                      the 0th to 12th scaling factors correspond to the cases when the abs of FMV belongs to 0~7，8~15，16~23，24~31，31~inf and act on the TU rate cost of non-SKP blocks
+       \       DAT_SCL_ON_MV_1  111      8       R, W         no     no       the 4th scaling factor of the SKP process based on MV
+       \                                                                      bit 07-00: the 4th scaling factor
 
        ITF     FLG_0X03         112      1       R, W         no     no       
        \       FLG_RFC          113      1       R, W         no     no       
