@@ -256,24 +256,76 @@ Register
        \       DAT_MOD_H        035      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 7, other definitions are as above
        \       DAT_MOD_I        036      18      R, W         no     no       the 5n~5n+4 search mode to be processed by RMD, where n = 8, other definitions are as above
 
-       IME     NUM_PTN          037      3       R, W         no     no       
-       \       DAT_PTN_0        038      30      R, W         no     no       
-       \       DAT_PTN_1        039      30      R, W         no     no       
-       \       DAT_PTN_2        040      30      R, W         no     no       
-       \       DAT_PTN_3        041      30      R, W         no     no       
-       \       DAT_PTN_4        042      30      R, W         no     no       
-       \       DAT_PTN_5        043      30      R, W         no     no       
-       \       DAT_PTN_6        044      30      R, W         no     no       
-       \       DAT_PTN_7        045      30      R, W         no     no       
-       \       DAT_SCL_MVD      046      8       R, W         no     no       
+       IME     NUM_PTN          037      3       R, W         no     no       Number of search patterns to be processed by IME.
+       \                                                                      n: IME needs to execute the first n + 1 patterns, n belongs to [0, 7].
+       \       DAT_PTN_0        038      30      R, W         no     no       The 0th search pattern of the IME.
+       \                                                                      bit 29-27 (Source of the center of the search pattern):
+       \                                                                         0 : Centered on the IMV described by the register. 
+       \                                                                         1 : Centered on the result of LCU. 
+       \                                                                         2 : Centered on the result of the 0th QLCU.
+       \                                                                         3 : Centered on the result of the 1st QLCU.
+       \                                                                         4 : Centered on the result of the 2nd QLCU.
+       \                                                                         5 : Centered on the result of the 3rd QLCU.
+       \                                                                      bit 26-20 (IMV horizontal coordinate of the register description).
+       \                                                                      bit 19-14 (IMV vertical coordinate described by the register).
+       \                                                                      bit 13-08 (The width of the search pattern):
+       \                                                                         -w the width w pixels of the search pattern.
+       \                                                                      bit 07-03 (the height of the search pattern):
+       \                                                                         -h height h pixels of the search pattern.
+       \                                                                      bit 02-01 (the slope of the search pattern):
+       \                                                                         0 : 1/2.
+       \                                                                         1 : 1/1.
+       \                                                                         2 : 2/1.
+       \                                                                         3 : inf.
+       \                                                                      bit 00 (downsampling enable, high valid).
+       \       DAT_PTN_1        039      30      R, W         no     no       Same as DAT_PTN_0.
+       \       DAT_PTN_2        040      30      R, W         no     no       Same as DAT_PTN_0.
+       \       DAT_PTN_3        041      30      R, W         no     no       Same as DAT_PTN_0.
+       \       DAT_PTN_4        042      30      R, W         no     no       Same as DAT_PTN_0.
+       \       DAT_PTN_5        043      30      R, W         no     no       Same as DAT_PTN_0.
+       \       DAT_PTN_6        044      30      R, W         no     no       Same as DAT_PTN_0.
+       \       DAT_PTN_7        045      30      R, W         no     no       Same as DAT_PTN_0.
+       \       DAT_SCL_MVD      046      8       R, W         no     no       MVD cost scaling during IME:
+       \                                                                         X : MVD cost scaling is x / 32 times.
 
-       FME     FLG_PRT          047      1       R, W         no     no       
-       \       NUM_TRV          048      1       R, W         no     no       
-       \       NUM_CTR          049      4       R, W         no     no       
-       \       ENM_CTR          050      12      R, W         no     no       
-       \       ENM_ITP          051      12      R, W         no     no       
-       \       DAT_SCL_MVD      052      8       R, W         no     no       
-       \       DAT_DLY          053      33      R, W         no     no       
+       FME     FLG_PRT          047      1       R, W         no     no       FME uses pre-partition to enable high efficiency.
+       \       NUM_TRV          048      1       R, W         no     no       Number of traversals required to process FME.
+       \                                                                         n: FME needs to process the first n + 1 traversal, n belongs to [0, 1].
+       \       NUM_CTR          049      4       R, W         no     no       Number of search centers that FME needs to process.
+       \                                                                         bit 3-2 : the number of search centers to process for the 0th traverse.
+       \                                                                            n: This traversal needs n + 1 centers before processing, and n belongs to [0, 2].
+       \                                                                         bit 1-0 : Number of search centers to process for the first traversal.
+       \       ENM_CTR          050      12      R, W         no     no       Search centers to be processed by FME.
+       \                                                                         bit 23-21 : (the 0th center of the 0th traversal).
+       \                                                                            0: centered on the IMV of the current block.
+       \                                                                            1: centered on the MvpA of the current block.
+       \                                                                            2: centered on the MvpB of the current block.
+       \                                                                            3: centered on (0,0).
+       \                                                                            4: centered on the FMV of the current block.
+       \                                                                         bit 20-18 : the 1st center of the 0th traversal.
+       \                                                                         bit 17-15 : 2nd center of the 0th traversal.
+       \                                                                         bit 14-12 : 3rd center of the 0th traversal.
+       \                                                                         bit 11-09 : 0th center of the 1st iteration.
+       \                                                                         bit 08-06 : center 0 of 1st iteration.
+       \                                                                         bit 08-06 : 1st center of the 1st iteration.
+       \                                                                         bit 05-03 : 2nd center of the 1st iteration.
+       \                                                                         bit 02-00 : 3rd center of the 1st iteration.
+       \       ENM_ITP          051      12      R, W         no     no       The way FME needs to handle the search center.
+       \                                                                         bit 15-14 : 0th traversal of 0th way.
+       \                                                                            0: 1/2 interpolation.
+       \                                                                            1: 1/4 interpolation.
+       \                                                                            2: no interpolation.
+       \                                                                         bit 13-12 : 1 way for the 0th iteration.
+       \                                                                         bit 11-10 : 2 ways of the 0th iteration.
+       \                                                                         bit 09-08 : 3 ways of the 0th iteration.
+       \                                                                         bit 07-06 : 0 ways of the 1st iteration.
+       \                                                                         bit 05-04 : 1 way of the 1st iteration.
+       \                                                                         bit 03-02 : 2 ways of the 1st iteration.
+       \                                                                         bit 01-00 : 3 ways of the 1st iteration.
+       \       DAT_SCL_MVD      052      8       R, W         no     no       Scaling of MVD tokens in the IME process.
+       \                                                                         x : MVD tokens are scaled to x / 32 times.
+       \       DAT_DLY          053      33      R, W         no     no       FME startup delay between each processing round.
+       \                                                                         n : delayed n-cycle start, n belongs to [0, 32].
 
        RDO     FLG_PRT          054      1       R, W         no     no       enable flag for RDO adopts pre-stage partition, high active
        \       FLG_ADD_LU_01    055      1       R, W         no     no       enable flag for RDO additionally tests modes 0 and 1 for luma, high active
