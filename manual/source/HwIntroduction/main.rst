@@ -1,4 +1,3 @@
-
 HW - Introduction
 =================
 
@@ -305,11 +304,15 @@ Register
        \       DAT_DLY_16       089      8       R, W         no     no       
        \       DAT_DLY_32       090      9       R, W         no     no       
 
-       ILF     FLG_DBF          091      1       R, W         no     no       
-       \       FLG_SAO          092      2       R, W         no     no       
-       \       DAT_OFF_BT_DIV2  093      6       R, W         no     no       
-       \       DAT_OFF_TC_DIV2  094      6       R, W         no     no       
-       \       DAT_SCL_LMD      095      8       R, W         no     no       
+       ILF     FLG_DBF          091      1       R, W         no     no       enable flag for deblocking filter, high active
+       \       FLG_SAO          092      2       R, W         no     no       enable flag for sample adaptive offset, high active
+       \                                                                      bit 1: chroma
+       \                                                                      bit 0: luma
+       \       DAT_OFF_BT_DIV2  093      6       R, W         no     no       offsetBetaDiv2 parameter for deblocking filter
+       \       DAT_OFF_TC_DIV2  094      6       R, W         no     no       offsetTcDiv2 parameter for deblocking filter
+       \       DAT_SCL_LMD      095      8       R, W         no     no       lambda scaling for in-loop filter
+       \                                                                      bit 07:00 -> luma channel of intra frame
+       \                                                                      value x: lambda is scaled to x of thirty two
 
        IIP     FLG              096      1       R, W         no     no       
        \       DAT_SCL_ON_QP_0  097      32      R, W         no     no       
