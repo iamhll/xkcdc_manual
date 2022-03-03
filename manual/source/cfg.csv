@@ -38,9 +38,9 @@ top,datLvl,open,1,/,int,1,/,/,30,level (valid under H264 standard),/,/,?
 top,datFps,open,1,/,int,1,/,/,60,frames per second,?,?,?
 top,datQpSeq,open,1,/,int,0,51,/,14,QP value of the current sequence,Yes,Yes,Yes
 top,datPrdIntra,open,1,p,int,-1,/,/,1,period of intra frames (-1: I(P)(P)(P)...; 0: (I)(I)(I)...; 1: (IP)(IP)(IP)...; 2: (IPP)(IPP)(IPP)...),Yes,Yes,Yes
-ltr,ltrFlg,open,1,/,bool,/,/,/,0,enable flag for LTR (long term reference),,,
-ltr,ltrEnmMod,open,1,/,int,0,1,/,0,mode of LTR (0: always referring to I frames; 1: referring to the nearest long term P frames or I frames),,,
-ltr,ltrDatPrd,open,1,/,int,0,/,/,4,period of LTR frames (0: (L)(L)(L)...; 1: (LS)(LS)(LS); 2: (LSS)(LSS)(LSS)...),,,
+ltr,ltrFlg,open,1,/,bool,/,/,/,0,enable flag for LTR (long term reference),?,?,?
+ltr,ltrEnmMod,open,1,/,int,0,1,/,0,mode of LTR (0: always referring to I frames; 1: referring to the nearest long term P frames or I frames),?,?,?
+ltr,ltrDatPrd,open,1,/,int,0,/,/,4,period of LTR frames (0: (L)(L)(L)...; 1: (LS)(LS)(LS); 2: (LSS)(LSS)(LSS)...),?,?,?
 gop,gopSiz,open,1,/,int,1,/,/,1,size of gop,/,same with H265-main,same with H265-main
 gop,gopEnmTyp,open,32,/,int,0,2,/,1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,frame types in one gop,/,same with H265-main,same with H265-main
 gop,gopDatPoc,open,32,/,int,0,/,/,1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,picture order counter in one gop,/,same with H265-main,same with H265-main
@@ -58,48 +58,48 @@ roi,roiFlgTyp,open,2,/,bool,/,/,/,0 0,enable flag for block types of ROI,Yes,sam
 roi,roiEnmTyp,open,2,/,int,0,2,/,0 2,block types of ROI (<value> 0: intra; 1: inter; 2: skip),Yes,same with H265-main,/
 roi,roiFlgQp,open,2,/,bool,/,/,/,0 0,enable flag for QP of ROI,Yes,same with H265-main,/
 roi,roiDatQp,open,2,/,int,0,51,/,22 37,QP value of ROI,Yes,same with H265-main,/
-r_c,r_cFlg,close,8,/,bool,/,/,/,0 0 0 0 0 0 0 0,enable flags (<index> 0: ratio based frame-level RC; 1/2: smooth based LCU-level intra/inter RC; 3/4: SADR based LCU-level intra/inter RC; 5/6: SATD based LCU-level intra/inter RC; 7: SAMV based LCU-level inter RC),,,
-r_c,r_cDatBps,close,1,/,double,0,/,/,12000,target bit rate of averaged frames (unit: kbps),,,
-r_c,r_cDatBpsIntra,close,1,/,double,0,/,/,39321.6,target bit rate of intra frames (unit: kbps),,,
-r_c,r_cDatBpsInter,close,1,/,double,0,/,/,11796.48,target bit rate of inter frames (unit: kbps),,,
-r_c,r_cDatQpMinIntra,close,1,/,int,0,51,/,5,minimum QP allowed in intra frames,,,
-r_c,r_cDatQpMinInter,close,1,/,int,0,51,/,5,minimum QP allowed in inter frames,,,
-r_c,r_cDatQpMaxIntra,close,1,/,int,0,51,/,50,maximum QP allowed in intra frames,,,
-r_c,r_cDatQpMaxInter,close,1,/,int,0,51,/,50,maximum QP allowed in inter frames,,,
-r_c,r_cDatThrRatiIntra,close,6,/,int,0,/,/,1 2 3 6 9 15,threshold of RATI based frame-level intra RC (unit: 6*log2),,,
-r_c,r_cDatDltRatiIntra,close,7,/,int,0,51,/,0 1 2 3 6 9 15,delta QP  of RATI based frame-level intra RC,,,
-r_c,r_cDatThrRatiInter,close,6,/,int,0,/,/,2 4 6 12 18 30,threshold of RATI based frame-level inter RC (unit: 6*log2),,,
-r_c,r_cDatDltRatiInter,close,7,/,int,0,51,/,0 1 2 3 6 9 15,delta QP  of RATI based frame-level inter RC,,,
-r_c,r_cDatSclSmthIntra,close,1,/,double,0,0.999023438,10,0.25,smooth scaler of SMTH based LCU-level intra RC (could be taken as the reciprocal of LCU number to be smoothed),,,
-r_c,r_cDatSclSmthInter,close,1,/,double,0,0.999023438,10,0.25,smooth scaler of SMTH based LCU-level inter RC (could be taken as the reciprocal of LCU number to be smoothed),,,
-r_c,r_cDatThrSmthIntra,close,1,/,int,0,/,/,1000,(minimum) threshold of SMTH based LCU-level intra RC,,,
-r_c,r_cDatThrSmthInter,close,1,/,int,0,/,/,1000,(minimum) threshold of SMTH based LCU-level inter RC,,,
-r_c,r_cDatDltSmthIntra,close,1,/,int,0,7,/,1,(maximum) delta QP of SMTH based LCU-level intra RC,,,
-r_c,r_cDatDltSmthInter,close,1,/,int,0,7,/,1,(maximum) delta QP of SMTH based LCU-level inter RC,,,
-r_c,r_cDatPrmSmthIntra,close,3,/,double,/,/,/,-64.62 0.1546 89.08,parameter of SMTH based LCU-level intra RC,,,
-r_c,r_cDatPrmSmthInter,close,3,/,double,/,/,/,-253.4 0.02585 269.5,parameter of SMTH based LCU-level inter RC,,,
-r_c,r_cDatThrSadrIntra,close,6,/,int,0,32767,/,1854 2363 5019 14161 18900 27758,threshold of SADR based LCU-level intra RC,,,
-r_c,r_cDatDltSadrIntra,close,7,/,int,-16,15,/,0 0 0 0 1 1 1,delta QP  of SADR based LCU-level intra RC,,,
-r_c,r_cDatThrSadrInter,close,6,/,int,0,32767,/,1854 2363 5019 14161 18900 27758,threshold of SADR based LCU-level inter RC,,,
-r_c,r_cDatDltSadrInter,close,7,/,int,-16,15,/,0 0 0 0 1 2 3,delta QP  of SADR based LCU-level inter RC,,,
-r_c,r_cDatThrSatdIntra,close,6,/,int,0,65535,/,7532 8478 13480 32816 41550 51096,threshold of SATD based LCU-level intra RC,,,
-r_c,r_cDatDltSatdIntra,close,7,/,int,-16,15,/,0 0 0 0 1 1 1,delta QP  of SATD based LCU-level intra RC,,,
-r_c,r_cDatThrSatdInter,close,6,/,int,0,65536,/,1638 1822 2068 3109 3622 4513,threshold of SATD based LCU-level inter RC,,,
-r_c,r_cDatDltSatdInter,close,7,/,int,-16,15,/,0 0 0 0 1 2 3,delta QP  of SATD based LCU-level inter RC,,,
-r_c,r_cDatThrSamvInter,close,6,/,int,0,2047,/,0 0 0 9 17 42,threshold of SAMV based LCU-level inter RC,,,
-r_c,r_cDatDltSamvInter,close,7,/,int,-16,15,/,0 0 0 0 1 1 1,delta QP  of SAMV based LCU-level inter RC,,,
-iip,iipEnmStg,open,1,/,int,0,4,/,3,decision stage of IIP (<value> 0: disable IIP; 1: do IIP decision in IME stage; 2: do rough IIP decision in IME stage and do final IIP decision in RDO stage; 3. do IIP decision in RDO stage; 4. do IIP decision in CFG stage (fix ratio and fix position)),?,same with H265-main,same with H265-main,,,,
-iip,iipEnmScl,open,1,/,int,0,1,/,0,scaler type (<value> 0: on D+lambdaR 1: on lambdaR),Yes,same with H265-main,same with H265-main,,,
-iip,iipDatRatio,open,1,/,int,1,/,/,4,the reciprocal of the ratio of iip blocks,Yes,same with H265-main,same with H265-main,,,
-iip,iipDatSclOnQp,open,14,/,double,0,7.96875,5,1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25,scaler to bias intra blocks (<index> 0/1/2/3/4/5/6/7/8/9/10/11/12/13: scaler under QP 0~19/20~21/22~23/24~25/26~27/28~29/30~31/32~33/34~35/36~37/38~39/40~41/42~42/44~51),Yes,same with H265-main,same with H265-main,,,
-iip,iipDatSclOnMv,open,5,/,double,0,7.96875,5,1.0 1.0 1.0 1.0 1.0,scale to bias intra blocks (<index> 0/1/2/3/4: scaler under MV 0~7/8~15/16~23/24~31/31~inf 1/4 pixel),Yes,same with H265-main,same with H265-main,,,
-mrg,mrgEnmLvl,open,1,/,int,0,2,/,1,merge level (<value> 0: none; 1: simple; 2: extra),Yes,same with H265-main,same with H265-main,,,
-mrg,mrgNum,open,1,/,int,1,6,/,6,maximum number of candidates,?,?,/,,,
-skp,skpFlg,open,2,/,bool,/,/,/,1 0,enable flags for skip (<index> 0: luma; 1:chroma),Yes,same with H265-main,/,,,
-skp,skpEnmScl,open,1,/,int,0,1,/,1,scaler type (<value> 0: on D+lambdaR 1: on lambdaR),Yes,same with H265-main,/,,,
-skp,skpDatSclOnChn,open,2,/,double,0,7.96875,5,1.0 1.0, scaler to bias skip blocks (<index> 0/1: scaler for luma/chroma),Yes,same with H265-main,/,,,
-skp,skpDatSclOnQp,open,14,/,double,0,7.96875,5,1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0,scale to bias skip blocks (<index> 0/1/2/3/4/5/6/7/8/9/10/11/12/13: scaler under QP 0~19/20~21/22~23/24~25/26~27/28~29/30~31/32~33/34~35/36~37/38~39/40~41/42~42/44~51),Yes,same with H265-main,/,,,
-skp,skpDatSclOnMv,open,5,/,double,0,7.96875,5,1.0 1.0 1.0 1.0 1.0,scale to bias skip blocks (<index> 0/1/2/3/4: scaler under MV 0~7/8~15/16~23/24~31/31~inf 1/4 pixel),Yes,same with H265-main,/,,,
+r_c,r_cFlg,close,8,/,bool,/,/,/,0 0 0 0 0 0 0 0,enable flags (<index> 0: ratio based frame-level RC; 1/2: smooth based LCU-level intra/inter RC; 3/4: SADR based LCU-level intra/inter RC; 5/6: SATD based LCU-level intra/inter RC; 7: SAMV based LCU-level inter RC),?,?,?
+r_c,r_cDatBps,close,1,/,double,0,/,/,12000,target bit rate of averaged frames (unit: kbps),?,?,?
+r_c,r_cDatBpsIntra,close,1,/,double,0,/,/,39321.6,target bit rate of intra frames (unit: kbps),Yes,?,?
+r_c,r_cDatBpsInter,close,1,/,double,0,/,/,11796.48,target bit rate of inter frames (unit: kbps),Yes,?,?
+r_c,r_cDatQpMinIntra,close,1,/,int,0,51,/,5,minimum QP allowed in intra frames,Yes,?,?
+r_c,r_cDatQpMinInter,close,1,/,int,0,51,/,5,minimum QP allowed in inter frames,Yes,?,?
+r_c,r_cDatQpMaxIntra,close,1,/,int,0,51,/,50,maximum QP allowed in intra frames,Yes,?,?
+r_c,r_cDatQpMaxInter,close,1,/,int,0,51,/,50,maximum QP allowed in inter frames,Yes,?,?
+r_c,r_cDatThrRatiIntra,close,6,/,int,0,/,/,1 2 3 6 9 15,threshold of RATI based frame-level intra RC (unit: 6*log2),?,?,?
+r_c,r_cDatDltRatiIntra,close,7,/,int,0,51,/,0 1 2 3 6 9 15,delta QP  of RATI based frame-level intra RC,?,?,?
+r_c,r_cDatThrRatiInter,close,6,/,int,0,/,/,2 4 6 12 18 30,threshold of RATI based frame-level inter RC (unit: 6*log2),?,?,?
+r_c,r_cDatDltRatiInter,close,7,/,int,0,51,/,0 1 2 3 6 9 15,delta QP  of RATI based frame-level inter RC,?,?,?
+r_c,r_cDatSclSmthIntra,close,1,/,double,0,0.999023438,10,0.25,smooth scaler of SMTH based LCU-level intra RC (could be taken as the reciprocal of LCU number to be smoothed),Yes,?,?
+r_c,r_cDatSclSmthInter,close,1,/,double,0,0.999023438,10,0.25,smooth scaler of SMTH based LCU-level inter RC (could be taken as the reciprocal of LCU number to be smoothed),Yes,?,?
+r_c,r_cDatThrSmthIntra,close,1,/,int,0,/,/,1000,(minimum) threshold of SMTH based LCU-level intra RC,Yes,?,?
+r_c,r_cDatThrSmthInter,close,1,/,int,0,/,/,1000,(minimum) threshold of SMTH based LCU-level inter RC,Yes,?,?
+r_c,r_cDatDltSmthIntra,close,1,/,int,0,7,/,1,(maximum) delta QP of SMTH based LCU-level intra RC,Yes,?,?
+r_c,r_cDatDltSmthInter,close,1,/,int,0,7,/,1,(maximum) delta QP of SMTH based LCU-level inter RC,Yes,?,?
+r_c,r_cDatPrmSmthIntra,close,3,/,double,/,/,/,-64.62 0.1546 89.08,parameter of SMTH based LCU-level intra RC,Yes,?,?
+r_c,r_cDatPrmSmthInter,close,3,/,double,/,/,/,-253.4 0.02585 269.5,parameter of SMTH based LCU-level inter RC,Yes,?,?
+r_c,r_cDatThrSadrIntra,close,6,/,int,0,32767,/,1854 2363 5019 14161 18900 27758,threshold of SADR based LCU-level intra RC,?,?,?
+r_c,r_cDatDltSadrIntra,close,7,/,int,-16,15,/,0 0 0 0 1 1 1,delta QP  of SADR based LCU-level intra RC,?,?,?
+r_c,r_cDatThrSadrInter,close,6,/,int,0,32767,/,1854 2363 5019 14161 18900 27758,threshold of SADR based LCU-level inter RC,?,?,?
+r_c,r_cDatDltSadrInter,close,7,/,int,-16,15,/,0 0 0 0 1 2 3,delta QP  of SADR based LCU-level inter RC,?,?,?
+r_c,r_cDatThrSatdIntra,close,6,/,int,0,65535,/,7532 8478 13480 32816 41550 51096,threshold of SATD based LCU-level intra RC,Yes,?,?
+r_c,r_cDatDltSatdIntra,close,7,/,int,-16,15,/,0 0 0 0 1 1 1,delta QP  of SATD based LCU-level intra RC,Yes,?,?
+r_c,r_cDatThrSatdInter,close,6,/,int,0,65536,/,1638 1822 2068 3109 3622 4513,threshold of SATD based LCU-level inter RC,Yes,?,?
+r_c,r_cDatDltSatdInter,close,7,/,int,-16,15,/,0 0 0 0 1 2 3,delta QP  of SATD based LCU-level inter RC,Yes,?,?
+r_c,r_cDatThrSamvInter,close,6,/,int,0,2047,/,0 0 0 9 17 42,threshold of SAMV based LCU-level inter RC,Yes,?,?
+r_c,r_cDatDltSamvInter,close,7,/,int,-16,15,/,0 0 0 0 1 1 1,delta QP  of SAMV based LCU-level inter RC,Yes,?,?
+iip,iipEnmStg,open,1,/,int,0,4,/,3,decision stage of IIP (<value> 0: disable IIP; 1: do IIP decision in IME stage; 2: do rough IIP decision in IME stage and do final IIP decision in RDO stage; 3. do IIP decision in RDO stage; 4. do IIP decision in CFG stage (fix ratio and fix position)),?,same with H265-main,same with H265-main
+iip,iipEnmScl,open,1,/,int,0,1,/,0,scaler type (<value> 0: on D+lambdaR 1: on lambdaR),Yes,same with H265-main,same with H265-main
+iip,iipDatRatio,open,1,/,int,1,/,/,4,the reciprocal of the ratio of iip blocks,Yes,same with H265-main,same with H265-main
+iip,iipDatSclOnQp,open,14,/,double,0,7.96875,5,1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25 1.25,scaler to bias intra blocks (<index> 0/1/2/3/4/5/6/7/8/9/10/11/12/13: scaler under QP 0~19/20~21/22~23/24~25/26~27/28~29/30~31/32~33/34~35/36~37/38~39/40~41/42~42/44~51),Yes,same with H265-main,same with H265-main
+iip,iipDatSclOnMv,open,5,/,double,0,7.96875,5,1.0 1.0 1.0 1.0 1.0,scale to bias intra blocks (<index> 0/1/2/3/4: scaler under MV 0~7/8~15/16~23/24~31/31~inf 1/4 pixel),Yes,same with H265-main,same with H265-main
+mrg,mrgEnmLvl,open,1,/,int,0,2,/,1,merge level (<value> 0: none; 1: simple; 2: extra),Yes,same with H265-main,same with H265-main
+mrg,mrgNum,open,1,/,int,1,6,/,6,maximum number of candidates,?,?,/
+skp,skpFlg,open,2,/,bool,/,/,/,1 0,enable flags for skip (<index> 0: luma; 1:chroma),Yes,same with H265-main,/
+skp,skpEnmScl,open,1,/,int,0,1,/,1,scaler type (<value> 0: on D+lambdaR 1: on lambdaR),Yes,same with H265-main,/
+skp,skpDatSclOnChn,open,2,/,double,0,7.96875,5,1.0 1.0, scaler to bias skip blocks (<index> 0/1: scaler for luma/chroma),Yes,same with H265-main,/
+skp,skpDatSclOnQp,open,14,/,double,0,7.96875,5,1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0,scale to bias skip blocks (<index> 0/1/2/3/4/5/6/7/8/9/10/11/12/13: scaler under QP 0~19/20~21/22~23/24~25/26~27/28~29/30~31/32~33/34~35/36~37/38~39/40~41/42~42/44~51),Yes,same with H265-main,/
+skp,skpDatSclOnMv,open,5,/,double,0,7.96875,5,1.0 1.0 1.0 1.0 1.0,scale to bias skip blocks (<index> 0/1/2/3/4: scaler under MV 0~7/8~15/16~23/24~31/31~inf 1/4 pixel),Yes,same with H265-main,/
 rmd,rmdFlgRun,close,1,/,bool,/,/,/,1,enable flag,/,same with H265-main,same with H265-main
 rmd,rmdEnmModLoad,close,1,/,int,0,2,/,0,load mode (<value> 0: load from pipe; 2. load from file; 3. load random data),Partially (load from pipe is supported),same with H265-main,same with H265-main
 rmd,rmdNumGrp,close,1,/,int,1,67,/,65,number of the intra-mode groups to be tested for each PU,Yes,same with H265-main,same with H265-main
@@ -165,54 +165,54 @@ e_c,e_cFlgSbh,close,1,/,bool,/,/,/,0,enable flag for sign bit hidden,/,/,/
 e_c,e_cEnmModLoad,close,1,/,int,0,2,/,0,load mode (<value> 0: load from pipe; 1. load from file; 2. load random data),Yes,Yes,Yes
 e_d,e_dFlgRun,close,1,/,bool,/,/,/,1,enable flag,Yes,Yes,Yes
 e_d,e_dEnmModLoad,close,1,/,int,0,2,/,0,load mode (<value> 0: load from pipe; 1. load from file; 2. load random data),Yes,Yes,Yes
-itf,itfFlgRfc,close,1,/,bool,/,/,/,0,enable flag for feature RFC,,,
-dump,dmpEnmLvlTop,close,1,/,int,/,/,/,0,dump level of TOP related test vector,,,
-dump,dmpEnmLvlRmd,close,1,/,int,/,/,/,0,dump level of RMD related test vector,,,
-dump,dmpEnmLvlIme,close,1,/,int,/,/,/,0,dump level of IME related test vector,,,
-dump,dmpEnmLvlFme,close,1,/,int,/,/,/,0,dump level of FME related test vector,,,
-dump,dmpEnmLvlRdo,close,1,/,int,/,/,/,0,dump level of RDO related test vector,,,
-dump,dmpEnmLvlIlf,close,1,/,int,/,/,/,0,dump level of ILF related test vector,,,
-dump,dmpEnmLvlE_c,close,1,/,int,/,/,/,0,dump level of E_C related test vector,,,
-dump,dmpEnmLvlE_d,close,1,/,int,/,/,/,0,dump level of E_D related test vector,,,
-dump,dmpEnmLvlItf,close,1,/,int,/,/,/,0,dump level of ITF related test vector,,,
-derived,numLst,close,1,/,int,/,/,/,/,number of reference lists of one frame,,,
-derived,numLcuX,close,1,/,int,/,/,/,/,number of LCUs in the X (horizontal) direction of one frame,,,
-derived,numLcuY,close,1,/,int,/,/,/,/,number of LCUs in the Y (vertical)   direction of one frame,,,
-derived,numCu,close,1,/,int,/,/,/,/,number of CUs in the X/Y (horizontal/vertical) direction of one LCU,,,
-derived,numPu,close,1,/,int,/,/,/,/,number of PUs in the X/Y (horizontal/vertical) direction of one LCU,,,
-derived,num4x4,close,1,/,int,/,/,/,/,number of 4x4 blocks in the X/Y (horizontal/vertical) direction of one LCU,,,
-derived,numLaC,close,1,/,int,/,/,/,/,number of channels (luma/chroma),,,
-derived,numMod,close,1,/,int,/,/,/,/,(maximum) number of modes,,,
-derived,numMpm,close,1,/,int,/,/,/,/,(maximum) number of MPMs,,,
-derived,trueSizFraX,close,1,w,int,160,4096,/,416,true size of the frame in the X (horizontal) direction,,,
-derived,trueSizFraY,close,1,h,int,160,4096,/,240,true size of the frame in the Y (vertical)   direction,,,
-derived,sizSchX,close,1,/,int,/,/,/,/,size of the search window (including LCU) in the X (horizontal) direction,,,
-derived,sizSchY,close,1,/,int,/,/,/,/,size of the search window (including LCU) in the Y (horizontal) direction,,,
-derived,trueSizSwX,close,1,/,int,/,/,/,/,true size of the search window (excluding LCU) in the X (horizontal) direction,,,
-derived,trueSizSwY,close,1,/,int,/,/,/,/,true size of the search window (excluding LCU) in the Y (vertical)   direction,,,
-derived,sizTuMax,close,1,/,int,/,/,/,/,maximum size of TU in the X/Y (horizontal/vertical) direction,,,
-derived,sizRecExt,close,1,/,int,/,/,/,/,extended size of rec buffer in the X/Y (horizontal/vertical) direction,,,
-derived,sizRefExt,close,1,/,int,/,/,/,/,extended size of ref buffer in the X/Y (horizontal/vertical) direction,,,
-derived,sizIipExtX,close,1,/,int,/,/,/,/,extended size of iip buffer in the X (horizontal) direction,,,
-derived,sizIipExtY,close,1,/,int,/,/,/,/,extended size of iip buffer in the Y (vertical)   direction,,,
-derived,sizModExtX,close,1,/,int,/,/,/,/,extended size of mod buffer in the X (horizontal) direction,,,
-derived,sizModExtY,close,1,/,int,/,/,/,/,extended size of mod buffer in the Y (vertical)   direction,,,
-derived,sizFmvExtX,close,1,/,int,/,/,/,/,extended size of fmv buffer in the X (horizontal) direction,,,
-derived,sizFmvExtY,close,1,/,int,/,/,/,/,extended size of fmv buffer in the Y (vertical)   direction,,,
-derived,sizCbfExtX,close,1,/,int,/,/,/,/,extended size of cbf buffer in the X (horizontal) direction,,,
-derived,sizCbfExtY,close,1,/,int,/,/,/,/,extended size of cbf buffer in the Y (vertical)   direction,,,
-derived,datDepCu,close,1,/,int,/,/,/,/,depth of CUs,,,
-derived,datModHor,close,1,/,int,/,/,/,/,intra mode for horizontal direction,,,
-derived,datModVer,close,1,/,int,/,/,/,/,intra mode for vertical   direction,,,
-derived,gopNumReorderPics,close,1,/,int,/,/,/,/,number of reorder pictures,,,
-derived,gopDatPocCur,close,1,/,int,/,/,/,/,current POC,,,
-derived,gopDatPocCurAbs,close,1,/,int,/,/,/,/,current POC (absolute),,,
-derived,gopDatPocRefDltNegCur,close,1,/,int,/,/,/,/,current delta POC of negative references,,,
-derived,gopDatPocRefDltPosCur,close,1,/,int,/,/,/,/,current delta POC of positive references,,,
-derived,gopDatPocRefNegCur,close,1,/,int,/,/,/,/,current POC of negative references,,,
-derived,gopDatPocRefPosCur,close,1,/,int,/,/,/,/,current POC of positive references,,,
-derived,gopDatPocRefNegCurAbs,close,1,/,int,/,/,/,/,current POC of negative references (absolute),,,
-derived,gopDatPocRefPosCurAbs,close,1,/,int,/,/,/,/,current POC of positive references (absolute),,,
-derived,gopIdxRefLast,close,33,/,int,/,/,/,/,last reference used in one gop,,,
-derived,rdoFlgRdoqAny,close,1,/,bool,/,/,/,/,if any rdoq is enabled,,,
-derived,rdoFlgSkpTsfAny,close,1,/,bool,/,/,/,/,if any transform skip is enabled,,,
+itf,itfFlgRfc,close,1,/,bool,/,/,/,0,enable flag for feature RFC,Yes,?,?
+dump,dmpEnmLvlTop,close,1,/,int,/,/,/,0,dump level of TOP related test vector,/,/,/
+dump,dmpEnmLvlRmd,close,1,/,int,/,/,/,0,dump level of RMD related test vector,/,/,/
+dump,dmpEnmLvlIme,close,1,/,int,/,/,/,0,dump level of IME related test vector,/,/,/
+dump,dmpEnmLvlFme,close,1,/,int,/,/,/,0,dump level of FME related test vector,/,/,/
+dump,dmpEnmLvlRdo,close,1,/,int,/,/,/,0,dump level of RDO related test vector,/,/,/
+dump,dmpEnmLvlIlf,close,1,/,int,/,/,/,0,dump level of ILF related test vector,/,/,/
+dump,dmpEnmLvlE_c,close,1,/,int,/,/,/,0,dump level of E_C related test vector,/,/,/
+dump,dmpEnmLvlE_d,close,1,/,int,/,/,/,0,dump level of E_D related test vector,/,/,/
+dump,dmpEnmLvlItf,close,1,/,int,/,/,/,0,dump level of ITF related test vector,/,/,/
+derived,numLst,close,1,/,int,/,/,/,/,number of reference lists of one frame,/,/,/
+derived,numLcuX,close,1,/,int,/,/,/,/,number of LCUs in the X (horizontal) direction of one frame,/,/,/
+derived,numLcuY,close,1,/,int,/,/,/,/,number of LCUs in the Y (vertical)   direction of one frame,/,/,/
+derived,numCu,close,1,/,int,/,/,/,/,number of CUs in the X/Y (horizontal/vertical) direction of one LCU,/,/,/
+derived,numPu,close,1,/,int,/,/,/,/,number of PUs in the X/Y (horizontal/vertical) direction of one LCU,/,/,/
+derived,num4x4,close,1,/,int,/,/,/,/,number of 4x4 blocks in the X/Y (horizontal/vertical) direction of one LCU,/,/,/
+derived,numLaC,close,1,/,int,/,/,/,/,number of channels (luma/chroma),/,/,/
+derived,numMod,close,1,/,int,/,/,/,/,(maximum) number of modes,/,/,/
+derived,numMpm,close,1,/,int,/,/,/,/,(maximum) number of MPMs,/,/,/
+derived,trueSizFraX,close,1,w,int,160,4096,/,416,true size of the frame in the X (horizontal) direction,/,/,/
+derived,trueSizFraY,close,1,h,int,160,4096,/,240,true size of the frame in the Y (vertical)   direction,/,/,/
+derived,sizSchX,close,1,/,int,/,/,/,/,size of the search window (including LCU) in the X (horizontal) direction,/,/,/
+derived,sizSchY,close,1,/,int,/,/,/,/,size of the search window (including LCU) in the Y (horizontal) direction,/,/,/
+derived,trueSizSwX,close,1,/,int,/,/,/,/,true size of the search window (excluding LCU) in the X (horizontal) direction,/,/,/
+derived,trueSizSwY,close,1,/,int,/,/,/,/,true size of the search window (excluding LCU) in the Y (vertical)   direction,/,/,/
+derived,sizTuMax,close,1,/,int,/,/,/,/,maximum size of TU in the X/Y (horizontal/vertical) direction,/,/,/
+derived,sizRecExt,close,1,/,int,/,/,/,/,extended size of rec buffer in the X/Y (horizontal/vertical) direction,/,/,/
+derived,sizRefExt,close,1,/,int,/,/,/,/,extended size of ref buffer in the X/Y (horizontal/vertical) direction,/,/,/
+derived,sizIipExtX,close,1,/,int,/,/,/,/,extended size of iip buffer in the X (horizontal) direction,/,/,/
+derived,sizIipExtY,close,1,/,int,/,/,/,/,extended size of iip buffer in the Y (vertical)   direction,/,/,/
+derived,sizModExtX,close,1,/,int,/,/,/,/,extended size of mod buffer in the X (horizontal) direction,/,/,/
+derived,sizModExtY,close,1,/,int,/,/,/,/,extended size of mod buffer in the Y (vertical)   direction,/,/,/
+derived,sizFmvExtX,close,1,/,int,/,/,/,/,extended size of fmv buffer in the X (horizontal) direction,/,/,/
+derived,sizFmvExtY,close,1,/,int,/,/,/,/,extended size of fmv buffer in the Y (vertical)   direction,/,/,/
+derived,sizCbfExtX,close,1,/,int,/,/,/,/,extended size of cbf buffer in the X (horizontal) direction,/,/,/
+derived,sizCbfExtY,close,1,/,int,/,/,/,/,extended size of cbf buffer in the Y (vertical)   direction,/,/,/
+derived,datDepCu,close,1,/,int,/,/,/,/,depth of CUs,/,/,/
+derived,datModHor,close,1,/,int,/,/,/,/,intra mode for horizontal direction,/,/,/
+derived,datModVer,close,1,/,int,/,/,/,/,intra mode for vertical   direction,/,/,/
+derived,gopNumReorderPics,close,1,/,int,/,/,/,/,number of reorder pictures,/,/,/
+derived,gopDatPocCur,close,1,/,int,/,/,/,/,current POC,/,/,/
+derived,gopDatPocCurAbs,close,1,/,int,/,/,/,/,current POC (absolute),/,/,/
+derived,gopDatPocRefDltNegCur,close,1,/,int,/,/,/,/,current delta POC of negative references,/,/,/
+derived,gopDatPocRefDltPosCur,close,1,/,int,/,/,/,/,current delta POC of positive references,/,/,/
+derived,gopDatPocRefNegCur,close,1,/,int,/,/,/,/,current POC of negative references,/,/,/
+derived,gopDatPocRefPosCur,close,1,/,int,/,/,/,/,current POC of positive references,/,/,/
+derived,gopDatPocRefNegCurAbs,close,1,/,int,/,/,/,/,current POC of negative references (absolute),/,/,/
+derived,gopDatPocRefPosCurAbs,close,1,/,int,/,/,/,/,current POC of positive references (absolute),/,/,/
+derived,gopIdxRefLast,close,33,/,int,/,/,/,/,last reference used in one gop,/,/,/
+derived,rdoFlgRdoqAny,close,1,/,bool,/,/,/,/,if any rdoq is enabled,/,/,/
+derived,rdoFlgSkpTsfAny,close,1,/,bool,/,/,/,/,if any transform skip is enabled,/,/,/
