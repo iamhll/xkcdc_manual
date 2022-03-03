@@ -233,8 +233,10 @@ Register
        \       IDX_LCU_X        023      7       R,           yes    no       horizontal position of current LCU
        \       IDX_LCU_Y        024      7       R,           yes    no       vertical position of current LCU
 
-       FTH     DAT_SRC_ORI      025      1       R, W         no     no       
-       \       SIZ_REF_Y        026      5       R, W         no     no       
+       FTH     DAT_SRC_ORI      025      1       R, W         no     no       the source of original pixels to be processed by FTH
+       \                                                                      0: externel memory; 1:cache
+       \       SIZ_REF_Y        026      5       R, W         no     no       the height (h) of the reference pixels to be processed by FTH
+       \                                                                      vertically [-h+1, h-1] and horizontally [-64, 64]
 
        RMD     NUM_GRP          027      4       R, W         no     no       the number of groups of search modes that RMD needs to process
        \                                                                      n: RMD needs to search the first (n + 1) groups of modes, n belongs to [0,12]
@@ -431,85 +433,201 @@ Register
        \       DAT_SCL_ON_MV_1  111      8       R, W         no     no       the 4th scaling factor of the SKP process based on MV
        \                                                                      bit 07-00: the 4th scaling factor
 
-       ITF     FLG_0X03         112      1       R, W         no     no       
-       \       FLG_RFC          113      1       R, W         no     no       
-       \       FLG_REC_EXT      114      1       R, W         yes    yes      
-       \       ENM_WRAPMEM      115      2       R, W         no     no       
-       \       ENM_REORDER      116      32      R, W         no     no       
-       \       NUM_BS_ENC_MAX   117      32      R, W         yes    yes      
-       \       NUM_BS_ENC       118      32      R,           yes    yes      
-       \       NUM_BS_DEC       119      32      R, W         no     yes      
-       \       ADR_ORI_LU       120      32      R, W         yes    yes      
-       \       ADR_ORI_CH       121      32      R, W         yes    yes      
-       \       ADR_REF_LU       122      32      R, W         yes    yes      
-       \       ADR_REF_CH       123      32      R, W         yes    yes      
-       \       ADR_REC_LU       124      32      R, W         yes    yes      
-       \       ADR_REC_CH       125      32      R, W         yes    yes      
-       \       ADR_REC_EXT_LU   126      32      R, W         yes    yes      
-       \       ADR_REC_EXT_CH   127      32      R, W         yes    yes      
-       \       ADR_BS           128      32      R, W         yes    yes      
-       \       ADR_PRM_REF_LU   129      32      R, W         yes    yes      
-       \       ADR_PRM_REF_CH   130      32      R, W         yes    yes      
-       \       ADR_PRM_REC_LU   131      32      R, W         yes    yes      
-       \       ADR_PRM_REC_CH   132      32      R, W         yes    yes      
-       \       STR_ORI_LU       133      32      R, W         yes    yes      
-       \       STR_ORI_CH       134      32      R, W         yes    yes      
-       \       STR_REF_LU       135      32      R, W         yes    yes      
-       \       STR_REF_CH       136      32      R, W         yes    yes      
-       \       STR_REC_LU       137      32      R, W         yes    yes      
-       \       STR_REC_CH       138      32      R, W         yes    yes      
-       \       STR_RFC          139      32      R, W         yes    yes      
-       \       SIZ_FRA_LU       140      32      R, W         yes    no       
-       \       SIZ_FRA_CH       141      32      R, W         yes    no       
-       \       SIZ_MEM_LU       142      32      R, W         yes    no       
-       \       SIZ_MEM_CH       143      32      R, W         yes    no       
-       \       OFF_REF_LU       144      32      R, W         yes    yes      
-       \       OFF_REF_CH       145      32      R, W         yes    yes      
-       \       OFF_REC_LU       146      32      R, W         yes    yes      
-       \       OFF_REC_CH       147      32      R, W         yes    yes      
+       ITF     FLG_0X03         112      1       R, W         no     no       enable flag for adding/removing 0x03, high avtive
+       \       FLG_RFC          113      1       R, W         no     no       enable flag for reference frame compression (RFC), high avtive
+       \       FLG_REC_EXT      114      1       R, W         yes    yes      enable flag for exporting an additional reconstructed pixels, high active 
+       \       ENM_WRAPMEM      115      2       R, W         no     no       enable flag for rotational storage
+       \                                                                      0: no rotation
+       \                                                                      1: software configuration
+       \                                                                      2: hardware adaptive rotation
+       \       ENM_REORDER      116      32      R, W         no     no       enable flag for reordering
+       \                                                                      0: normal order
+       \                                                                      1: rotate 90° clockwise to read
+       \       NUM_BS_ENC_MAX   117      32      R, W         yes    yes      the maximum value of the bitstream length, high effective
+       \                                                                      n: the length of the bitstream does not exceed n bytes
+       \       NUM_BS_ENC       118      32      R,           yes    yes      the length of the bitstream obtained from the encoder(byte)
+       \                                                                      n: get the bitstream of n bytes
+       \       NUM_BS_DEC       119      32      R, W         no     yes      the length of the bitstream sent to the decoder(byte)
+       \                                                                      n: will deliver a bitstream of n bytes
+       \       ADR_ORI_LU       120      32      R, W         yes    yes      the memory address assigned for the original pixels of luminance component
+       \                                                                      the unit of address is byte, the same below.
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_ORI_CH       121      32      R, W         yes    yes      the memory address assigned for the original pixels of chroma component
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_REF_LU       122      32      R, W         yes    yes      the memory address assigned for the reference pixels of luminance component
+       \                                                                      (data part, always valid)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_REF_CH       123      32      R, W         yes    yes      the memory address assigned for the reference pixels of chroma component
+       \                                                                      (data part, always valid)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_REC_LU       124      32      R, W         yes    yes      the memory address assigned for the reconstructed pixels of luminance component
+       \                                                                      (data part, always valid)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_REC_CH       125      32      R, W         yes    yes      the memory address assigned for the reconstructed pixels of chroma component
+       \                                                                      (data part, always valid)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_REC_EXT_LU   126      32      R, W         yes    yes      the memory address assigned for the additional reconstructed pixels of luminance component
+       \                                                                      (data part, always valid)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_REC_EXT_CH   127      32      R, W         yes    yes      the memory address assigned for the additional reconstructed pixels of chroma component
+       \                                                                      (data part, always valid)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_BS           128      32      R, W         yes    yes      the memory address assigned for the bitstream
+       \                                                                      (no alignment required)
+       \       ADR_PRM_REF_LU   129      32      R, W         yes    yes      the memory address assigned for the reference pixels of luminance component
+       \                                                                      (parameter part, only valid when RFC is enabled)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_PRM_REF_CH   130      32      R, W         yes    yes      the memory address assigned for the reference pixels of chroma component
+       \                                                                      (parameter part, only valid when RFC is enabled)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_PRM_REC_LU   131      32      R, W         yes    yes      the memory address assigned for the reconstructed pixels of luminance component
+       \                                                                      (parameter part, only valid when RFC is enabled)
+       \                                                                      (requires 32 byte alignment.) 
+       \       ADR_PRM_REC_CH   132      32      R, W         yes    yes       the memory address assigned for the reconstructed pixels of chroma component
+       \                                                                      (parameter part, only valid when RFC is enabled)
+       \                                                                      (requires 32 byte alignment.) 
+       \       STR_ORI_LU       133      32      R, W         yes    yes      the storage step size assigned for the original pixels of luminance component
+       \                                                                      the unit is byte, the same below
+       \                                                                      the original pixels are stored in rows, and the step size describes the relative offset between rows.
+       \                                                                      (requires 32 byte alignment.) 
+       \       STR_ORI_CH       134      32      R, W         yes    yes      the storage step size assigned for the original pixels of chroma component
+       \                                                                      (requires 32 byte alignment.) 
+       \       STR_REF_LU       135      32      R, W         yes    yes      the storage step size assigned for the reference pixels of luminance component
+       \                                                                      the reference pixels are stored in rows when RFC is disabled, and the step size describes the relative offset between rows.
+       \                                                                      the reference pixels are stored in 4 LCU when RFC is enabled, and the step size describes the relative offset between blocks.
+       \                                                                      (requires 32 byte alignment.) 
+       \       STR_REF_CH       136      32      R, W         yes    yes      the storage step size assigned for the reference pixels of chroma component
+       \                                                                      (requires 32 byte alignment.) 
+       \       STR_REC_LU       137      32      R, W         yes    yes      the storage step size assigned for the reconstructed pixels of luminance component
+       \                                                                      the reconstructed pixels are stored in rows when RFC is disabled, and the step size describes the relative offset between rows.
+       \                                                                      the reconstructed pixels are stored in 4 LCU when RFC is enabled, and the step size describes the relative offset between blocks.
+       \                                                                      (requires 32 byte alignment.) 
+       \       STR_REC_CH       138      32      R, W         yes    yes      the storage step size assigned for the reconstructed pixels of chroma component
+       \                                                                      (requires 32 byte alignment.) 
+       \       STR_RFC          139      32      R, W         yes    yes      to be removed
+       \       SIZ_FRA_LU       140      32      R, W         yes    no       the storage space for one reconstructed or reference frame of luminance component
+       \                                                                      (enabled when ENM_WRAPMEM equals to 2)
+       \       SIZ_FRA_CH       141      32      R, W         yes    no       the storage space for one reconstructed or reference frame of chroma component
+       \                                                                      (enabled when ENM_WRAPMEM equals to 2)
+       \       SIZ_MEM_LU       142      32      R, W         yes    no       the storage space for reconstructed and reference pixels of luminance component
+       \                                                                      (enabled when ENM_WRAPMEM equals to 1 or 2)
+       \       SIZ_MEM_CH       143      32      R, W         yes    no       the storage space for reconstructed and reference pixels of chroma component
+       \                                                                      (enabled when ENM_WRAPMEM equals to 1 or 2)
+       \       OFF_REF_LU       144      32      R, W         yes    yes      the offset for reference pixels of luminance component in the rotation space
+       \                                                                      (enabled when ENM_WRAPMEM equals to 1)
+       \       OFF_REF_CH       145      32      R, W         yes    yes      the offset for reference pixels of chroma component in the rotation space
+       \                                                                      (enabled when ENM_WRAPMEM equals to 1)
+       \       OFF_REC_LU       146      32      R, W         yes    yes      the offset for reconstructed pixels of luminance component in the rotation space
+       \                                                                      (enabled when ENM_WRAPMEM equals to 1)
+       \       OFF_REC_CH       147      32      R, W         yes    yes      the offset for reconstructed pixels of chroma component in the rotation space
+       \                                                                      (enabled when ENM_WRAPMEM equals to 1)
 
-       DBG     NUM_SIZ_PU_04    148      32      R,           yes    yes      
-       \       NUM_SIZ_PU_08    149      32      R,           yes    yes      
-       \       NUM_SIZ_PU_16    150      32      R,           yes    yes      
-       \       NUM_SIZ_PU_32    151      32      R,           yes    yes      
-       \       NUM_TYP_PU_I     152      32      R,           yes    yes      
-       \       NUM_TYP_PU_P     153      32      R,           yes    yes      
-       \       NUM_TYP_PU_M     154      32      R,           yes    yes      
-       \       NUM_TYP_PU_S     155      32      R,           yes    yes      
-       \       NUM_FMV_00_07    156      32      R,           yes    yes      
-       \       NUM_FMV_08_15    157      32      R,           yes    yes      
-       \       NUM_FMV_16_23    158      32      R,           yes    yes      
-       \       NUM_FMV_24_31    159      32      R,           yes    yes      
-       \       DAT_QP           160      32      R,           yes    yes      
-       \       DAT_LMD          161      32      R,           yes    yes      
-       \       ENM_SRC_BNK      162      1       R, W         no     no       
+       DBG     NUM_SIZ_PU_04    148      32      R,           yes    yes      the number of 04x04 PUs in a frame
+       \       NUM_SIZ_PU_08    149      32      R,           yes    yes      the number of 08x08 PUs in a frame
+       \       NUM_SIZ_PU_16    150      32      R,           yes    yes      the number of 16x16 PUs in a frame
+       \       NUM_SIZ_PU_32    151      32      R,           yes    yes      the number of 32x32 PUs in a frame
+       \       NUM_TYP_PU_I     152      32      R,           yes    yes      the number of I blocks in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       NUM_TYP_PU_P     153      32      R,           yes    yes      the number of P blocks in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       NUM_TYP_PU_M     154      32      R,           yes    yes      the number of Merge blocks in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       NUM_TYP_PU_S     155      32      R,           yes    yes      the number of Skip blocks in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       NUM_FMV_00_07    156      32      R,           yes    yes      the number of blocks with FMV less than 08 in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       NUM_FMV_08_15    157      32      R,           yes    yes      the number of blocks with FMV less than 16 in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       NUM_FMV_16_23    158      32      R,           yes    yes      the number of blocks with FMV less than 24 in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       NUM_FMV_24_31    159      32      R,           yes    yes      the number of blocks with FMV less than 32 in the P frame
+       \                                                                      (in the unit of 8x8 blocks)
+       \       DAT_QP           160      32      R,           yes    yes      the sum of QPs in a frame 
+       \                                                                      (in the unit of LCU)
+       \       DAT_LMD          161      32      R,           yes    yes      the sum of LUMDAs in a frame 
+       \                                                                      (in the unit of LCU)
+       \       ENM_SRC_BNK      162      1       R, W         no     no       the control source for bank
+       \                                                                      0: register
+       \                                                                      1: externel
 
-       ROI     0_POS            163      28      R, W         yes    yes      
-       \       0_ENM_TYP        164      2       R, W         yes    yes      
-       \       0_DAT_QP         165      7       R, W         yes    yes      
-       \       1_POS            166      28      R, W         yes    yes      
-       \       1_ENM_TYP        167      2       R, W         yes    yes      
-       \       1_DAT_QP         168      7       R, W         yes    yes      
+       ROI     0_POS            163      28      R, W         yes    yes      the position for region of interest (ROI) 0
+       \                                                                      bit 27:21 -> the horizontal position of the start LCU
+       \                                                                      bit 20:14 -> the vertical position of the start LCU
+       \                                                                      bit 13:07 -> the horizontal position of the end LCU
+       \                                                                      bit 06:00 -> the vertical position of the end LCU
+       \       0_ENM_TYP        164      2       R, W         yes    yes      the block type for ROI 0
+       \                                                                      bit 1:0 -> the forced block type
+       \                                                                      0: no force
+       \                                                                      1: intra block
+       \                                                                      2: inter block
+       \                                                                      3: skip block
+       \       0_DAT_QP         165      7       R, W         yes    yes      the QP for ROI 0
+       \                                                                      bit 6 -> the enable flag for the forced QP
+       \                                                                      bit 5:0 -> the forced QP
+       \       1_POS            166      28      R, W         yes    yes      the position for region of interest (ROI)1
+       \                                                                      bit 27:21 -> the horizontal position of the start LCU
+       \                                                                      bit 20:14 -> the vertical position of the start LCU
+       \                                                                      bit 13:07 -> the horizontal position of the end LCU
+       \                                                                      bit 06:00 -> the vertical position of the end LCU
+       \       1_ENM_TYP        167      2       R, W         yes    yes      the block type for ROI 1
+       \                                                                      bit 1:0 -> the forced block type
+       \                                                                      0: no force
+       \                                                                      1: intra block
+       \                                                                      2: inter block
+       \                                                                      3: skip block
+       \       1_DAT_QP         168      7       R, W         yes    yes      the QP for ROI 1
+       \                                                                      bit 6 -> the enable flag for the forced QP
+       \                                                                      bit 5:0 -> the forced QP
 
-       R_C     NUM_BPP          169      16      R, W         yes    yes      
-       \       DAT_QP_MIN       170      6       R, W         yes    yes      
-       \       DAT_QP_MAX       171      6       R, W         yes    yes      
-       \       SMTH_FLG         172      1       R, W         yes    yes      
-       \       SMTH_DAT_SCL     173      10      R, W         yes    yes      
-       \       SMTH_DAT_THR     174      16      R, W         yes    yes      
-       \       SMTH_DAT_DLT     175      5       R, W         yes    yes      
-       \       SATD_FLG         176      1       R, W         yes    yes      
-       \       SATD_DAT_THR_0   177      32      R, W         yes    yes      
-       \       SATD_DAT_THR_1   178      32      R, W         yes    yes      
-       \       SATD_DAT_THR_2   179      32      R, W         yes    yes      
-       \       SATD_DAT_DLT_0   180      30      R, W         yes    yes      
-       \       SATD_DAT_DLT_1   181      5       R, W         yes    yes      
-       \       SAMV_FLG         182      1       R, W         yes    yes      
-       \       SAMV_DAT_THR_0   183      32      R, W         yes    yes      
-       \       SAMV_DAT_THR_1   184      32      R, W         yes    yes      
-       \       SAMV_DAT_THR_2   185      32      R, W         yes    yes      
-       \       SAMV_DAT_DLT_0   186      30      R, W         yes    yes      
-       \       SAMV_DAT_DLT_1   187      5       R, W         yes    yes      
+       R_C     NUM_BPP          169      16      R, W         yes    yes      the target bit per pixel (BPP)
+       \                                                                      x: target BPP equals x / 256
+       \       DAT_QP_MIN       170      6       R, W         yes    yes      the minimum QP
+       \       DAT_QP_MAX       171      6       R, W         yes    yes      the maximum QP
+       \       SMTH_FLG         172      1       R, W         yes    yes      the enable flag for smooth (SMTH) algorithm, high active
+       \       SMTH_DAT_SCL     173      10      R, W         yes    yes      the scaling factor used by the SMTH algorithm
+       \                                                                      x: the bitrate difference is scaled to x / 1024
+       \       SMTH_DAT_THR     174      16      R, W         yes    yes      the adjustment threshold used by the SMTH algorithm
+       \                                                                      x: QP adjustment is enabled only when the bitrate difference exceeds x
+       \       SMTH_DAT_DLT     175      5       R, W         yes    yes      the QP threshold used by the SMTH algorithm
+       \                                                                      x: QP adjustment is no more than x
+       \       SATD_FLG         176      1       R, W         yes    yes      the enable flag for sum of absolute transformed difference (SATD), high active
+       \       SATD_DAT_THR_0   177      32      R, W         yes    yes      the 2n~2n+1-th threshold used by SATD algorithm where n = 0
+       \                                                                      bit 31:16 -> the 2n-th threshold
+       \                                                                          x: the threshold is x, belongs to [0, 65535]
+       \                                                                      bit 15:00 -> the 2n+1-th threshold
+       \                                                                      when SATD is less than the threshold n, the increment n is used.
+       \                                                                      otherwise, continue to query the threshold n+1
+       \       SATD_DAT_THR_1   178      32      R, W         yes    yes      the 2n~2n+1-th threshold used by SATD algorithm where n = 1
+       \       SATD_DAT_THR_2   179      32      R, W         yes    yes      the 2n~2n+1-th threshold used by SATD algorithm where n = 2
+       \       SATD_DAT_DLT_0   180      30      R, W         yes    yes      the 6n~6n+5-th increment used by SATD algorithm where n = 0
+       \                                                                      bit 29:25 -> the 6n-th increment
+       \                                                                          x: the increment is x, belongs to [-16, 15]
+       \                                                                      bit 24:20 -> the 6n+1-th increment
+       \                                                                      bit 19:15 -> the 6n+2-th increment
+       \                                                                      bit 14:10 -> the 6n+3-th increment
+       \                                                                      bit 09:05 -> the 6n+4-th increment
+       \                                                                      bit 04:00 -> the 6n+5-th increment
+       \       SATD_DAT_DLT_1   181      5       R, W         yes    yes      the 6th increment used by SATD algorithm
+       \                                                                      bit 04:00 -> the 6-th increment
+       \       SAMV_FLG         182      1       R, W         yes    yes      the enable flag for sum of absolute motion vector (SAMV), high avtive
+       \       SAMV_DAT_THR_0   183      32      R, W         yes    yes      the 2n~2n+1-th threshold used by SAMV algorithm where n = 0
+       \                                                                      bit 31:16 -> the 2n-th threshold
+       \                                                                          x: the threshold is x, belongs to [0, 65535]
+       \                                                                      bit 15:00 -> the 2n+1-th threshold
+       \                                                                      when SAMV is less than the threshold n, the increment n is used.
+       \                                                                      otherwise, continue to query the threshold n+1
+       \       SAMV_DAT_THR_1   184      32      R, W         yes    yes      the 2n~2n+1-th threshold used by SAMV algorithm where n = 1
+       \       SAMV_DAT_THR_2   185      32      R, W         yes    yes      the 2n~2n+1-th threshold used by SAMV algorithm where n = 2
+       \       SAMV_DAT_DLT_0   186      30      R, W         yes    yes      the 6n~6n+5-th increment used by SAMV algorithm where n = 0
+       \                                                                      bit 29:25 -> the 6n-th increment
+       \                                                                          x: the increment is x, belongs to [-16, 15]
+       \                                                                      bit 24:20 -> the 6n+1-th increment
+       \                                                                      bit 19:15 -> the 6n+2-th increment
+       \                                                                      bit 14:10 -> the 6n+3-th increment
+       \                                                                      bit 09:05 -> the 6n+4-th increment
+       \                                                                      bit 04:00 -> the 6n+5-th increment
+       \       SAMV_DAT_DLT_1   187      5       R, W         yes    yes      the 6th increment used by SATD algorithm
+       \                                                                      bit 04:00 -> the 6-th increment
 
-       RSV     RESRVED          188      32      R,           no     yes      
+       RSV     RESRVED          188      32      R,           no     yes      the reserved register
       ======= ================ ======== ======= ============ ====== ======== =============
