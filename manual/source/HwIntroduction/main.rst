@@ -403,7 +403,7 @@ Register
        \                                                                      bit 23-16: the (4n+1)th scaling factor
        \                                                                      bit 15-08: the (4n+2)th scaling factor
        \                                                                      bit 07-00: the (4n+3)th scaling factor
-       \                                                                      the 0th to 12th scaling factors correspond to the cases when the abs of FMV belongs to 0~7，8~15，16~23，24~31，31~inf and act on the rate cost block of the I block
+       \                                                                      the 0th to 12th scaling factors correspond to the cases when the abs of FMV belongs to 0~7, 8~15, 16~23, 24~31, 31~inf and act on the rate cost block of the I block
        \       DAT_SCL_ON_MV_1  102      8       R, W         no     no       the 4th scaling factor of the IIP process based on MV
        \                                                                      bit 07-00: the 4th scaling factor
 
@@ -429,7 +429,7 @@ Register
        \                                                                      bit 23-16: the (4n+1)th scaling factor
        \                                                                      bit 15-08: the (4n+2)th scaling factor
        \                                                                      bit 07-00: the (4n+3)th scaling factor
-       \                                                                      the 0th to 12th scaling factors correspond to the cases when the abs of FMV belongs to 0~7，8~15，16~23，24~31，31~inf and act on the TU rate cost of non-SKP blocks
+       \                                                                      the 0th to 12th scaling factors correspond to the cases when the abs of FMV belongs to 0~7, 8~15, 16~23, 24~31, 31~inf and act on the TU rate cost of non-SKP blocks
        \       DAT_SCL_ON_MV_1  111      8       R, W         no     no       the 4th scaling factor of the SKP process based on MV
        \                                                                      bit 07-00: the 4th scaling factor
 
