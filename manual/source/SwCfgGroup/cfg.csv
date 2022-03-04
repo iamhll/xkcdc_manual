@@ -38,9 +38,9 @@ top,datLvl,open,1,/,int,1,/,/,30,level (valid under H264 standard),/,/,?
 top,datFps,open,1,/,int,1,/,/,60,frames per second,?,?,?
 top,datQpSeq,open,1,/,int,0,51,/,14,QP value of the current sequence,Yes,Yes,Yes
 top,datPrdIntra,open,1,p,int,-1,/,/,1,period of intra frames (-1: I(P)(P)(P)...; 0: (I)(I)(I)...; 1: (IP)(IP)(IP)...; 2: (IPP)(IPP)(IPP)...),Yes,Yes,Yes
-ltr,ltrFlg,open,1,/,bool,/,/,/,0,enable flag for LTR (long term reference),?,?,?
-ltr,ltrEnmMod,open,1,/,int,0,1,/,0,mode of LTR (0: always referring to I frames; 1: referring to the nearest long term P frames or I frames),?,?,?
-ltr,ltrDatPrd,open,1,/,int,0,/,/,4,period of LTR frames (0: (L)(L)(L)...; 1: (LS)(LS)(LS); 2: (LSS)(LSS)(LSS)...),?,?,?
+ltr,ltrFlg,open,1,/,bool,/,/,/,0,enable flag for LTR (long term reference),/,same with H265-main,same with H265-main
+ltr,ltrEnmMod,open,1,/,int,0,1,/,0,mode of LTR (0: always referring to I frames; 1: referring to the nearest long term P frames or I frames),/,same with H265-main,same with H265-main
+ltr,ltrDatPrd,open,1,/,int,0,/,/,4,period of LTR frames (0: (L)(L)(L)...; 1: (LS)(LS)(LS); 2: (LSS)(LSS)(LSS)...),/,same with H265-main,same with H265-main
 gop,gopSiz,open,1,/,int,1,/,/,1,size of gop,/,same with H265-main,same with H265-main
 gop,gopEnmTyp,open,32,/,int,0,2,/,1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,frame types in one gop,/,same with H265-main,same with H265-main
 gop,gopDatPoc,open,32,/,int,0,/,/,1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,picture order counter in one gop,/,same with H265-main,same with H265-main

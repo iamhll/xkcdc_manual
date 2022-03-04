@@ -6,14 +6,5 @@ LTR
       :width: 30%
 
 
-   .. table::
-      :align: left
-      :widths: auto
+   .. include:: ltr_sub.rst
 
-      ============ =========== ====== =========== ======== =============== =============== =========== =============== ===========================================================================================================
-       domain       name        size   short key   type     minimum value   maximum value   precision   default value   description
-      ============ =========== ====== =========== ======== =============== =============== =========== =============== ===========================================================================================================
-       ltr          ltrFlg      1      /           bool     /               /               /           0               enable flag for LTR (long term reference)
-       ltr          ltrEnmMod   1      /           int      0               1               /           0               mode of LTR (0: always referring to I frames; 1: referring to the nearest long term P frames or I frames)
-       ltr          ltrDatPrd   1      /           int      0               /               /           4               period of LTR frames (0: (L)(L)(L)...; 1: (LS)(LS)(LS); 2: (LSS)(LSS)(LSS)...)
-      ============ =========== ====== =========== ======== =============== =============== =========== =============== ===========================================================================================================
