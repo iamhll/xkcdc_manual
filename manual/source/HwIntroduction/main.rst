@@ -121,6 +121,7 @@ Integration Consideration
     #. **CLOCK**
 
        There are two clocks ``clk`` and ``clk_e_d``, which are asynchronously processed internally. 
+       The ``clk_e_d`` is dedicated to entropy decoding (E_D) module, and all other modules work in the ``clk`` clock domain.
        The top layer can give asynchronous clocks or synchronous clocks, 
        but it is recommended that the clock frequency of ``clk_e_d`` be lower.
 
@@ -156,6 +157,15 @@ Integration Consideration
        ```SIZE_LCU*`DATA_PXL_WD/`ITF_DATA_AXI_DAT_WD``, and other bit width information is 
        under ``DEFINE FOR ITF`` in defines_enc.vh.
 
+    #. **Resource Consumption**
+
+       The resource consumption for H265-main encoder soc and core is shown below.
+
+       .. image:: resource_soc.png
+         :width: 20%
+
+       .. image:: resource_hier.png
+         :width: 70%
 
 
 Register
