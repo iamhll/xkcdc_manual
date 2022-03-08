@@ -1,7 +1,7 @@
 HW - Introduction
 =================
 
-XKCDC-RTL is an integrated C model for H264 encoder, H265 codec and NSTD codec
+XKCDC-RTL is an integrated RTL for H264 encoder, H265 codec and NSTD codec
 
 Diagram
 -------
