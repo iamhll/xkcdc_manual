@@ -771,3 +771,15 @@ Register
 
        RSV     RESRVED          188      32      R,           no     yes      the reserved register
       ======= ================ ======== ======= ============ ====== ======== =============
+
+
+About WRAPMEM
+-------------
+
+   register ENM_WRAPMEM is used to control the memory wrapping behavior of reconstruction (REC) and reference (REF) frames.
+
+   | when set with ENM_WRAPMEM_NONE, no wraping is involved;
+   | when set with ENM_WRAPMEM_HOST, if any part in REC,REF_LU,CH exceeds ADR_WRAPMEM_LU,CH_HI, it will be wrapped back to ADR_WRAPMEM_LU,CH_LO.
+
+   .. image:: wrapmem.png
+      :width: 40%
