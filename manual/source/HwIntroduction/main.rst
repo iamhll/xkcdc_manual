@@ -207,8 +207,8 @@ Recommended Configuration
        \                                  QLCU1      10      10       1       0              (diamond)
        \                                  QLCU2      10      10       1       0              (diamond)
        \                                  QLCU3      10      10       1       0              (diamond)
-       H265-low    A                      CMD(0,0)   20      10       0.5     0              (diamond)   970
-       \                                  LCU        16      8        1       0              (diamond)
+       H265-low    A                      CMD(0,0)   20      10       0.5     0              (diamond)   794
+       \                                  LCU        12      6        1       0              (diamond)
        \           B                      CMD(0,0)   32      16       0.5     0              (hexagon)   1098
        \                                  QLCU0      10      10       1       0              (diamond)
        \                                  QLCU1      10      10       1       0              (diamond)
