@@ -783,3 +783,37 @@ About WRAPMEM
 
    .. image:: wrapmem.png
       :width: 40%
+
+   In this way, the total memory occupation of REC and REF could be saved to a large extent. For example,
+   
+   | if ADR_WRAPMEM_LU_LO is set to X, ADR_WRAPMEM_LU_HI is set to X + 1.2F, where X is an arbitary base address, F is the size of the frame (luma part only) in bytes.
+   | For the first frame, ADR_REC_LU could be set to X, and there is no need to set ADR_REF_LU since it must be an I frame.
+   | For the second frame, ADR_REC_LU could be set to X+F, and ADR_REF_LU must be set to the previous ADR_REC_LU, namely X.
+   | For the third frame, ADR_REC_LU could be set to X+0.8F (X+(1+1)%1.2F), and ADR_REF_LU must be set to the previous ADR_REC_LU, namely X+F.
+   | For the fourth frame, ADR_REC_LU could be set to X+0.6F (X+(0.8+1)%1.2F), and ADR_REF_LU must be set to the previous ADR_REC_LU, namely X+0.8F.
+   | ...
+
+   | if ADR_WRAPMEM_LU_LO is set to X, ADR_WRAPMEM_LU_HI is set to X + 1.5F, where X is an arbitary base address, F is the size of the frame (luma part only) in bytes.
+   | For the first frame, ADR_REC_LU could be set to X, and there is no need to set ADR_REF_LU since it must be an I frame.
+   | For the second frame, ADR_REC_LU could be set to X+F, and ADR_REF_LU must be set to the previous ADR_REC_LU, namely X.
+   | For the third frame, ADR_REC_LU could be set to X+0.5F (X+(1+1)%1.5F), and ADR_REF_LU must be set to the previous ADR_REC_LU, namely X+F.
+   | For the fourth frame, ADR_REC_LU could be set to X+F (X+(0.5+1)%1.5F), and ADR_REF_LU must be set to the previous ADR_REC_LU, namely X+0.5F.
+   | ...
+
+   In a conclusion, 
+
+   ::
+
+      ADR_REC_LU(n) = ADR_WRAPMEM_LU_LO + (ADR_REC_LU(n-1) - ADR_WRAPMEM_LU_LO + F) % (ADR_WRAPMEM_LU_HI - ADR_WRAPMEM_LU_LO), n = 1, 2, 3, ...
+      ADR_REC_LU(0) = ADR_WRAPMEM_LU_LO;
+      ADR_REF_LU(n) = ADR_REC_LU(n-1), n = 1, 2, 3, ...
+
+   where n denotes for frame index, F denotes for the size of the frame (luma part only)
+
+   ::
+
+      ADR_REC_CH(n) = ADR_WRAPMEM_CH_LO + (ADR_REC_CH(n-1) - ADR_WRAPMEM_CH_LO + F) % (ADR_WRAPMEM_CH_HI - ADR_WRAPMEM_CH_LO), n = 1, 2, 3, ...
+      ADR_REC_CH(0) = ADR_WRAPMEM_CH_LO;
+      ADR_REF_CH(n) = ADR_REC_CH(n-1), n = 1, 2, 3, ...
+
+   where n denotes for frame index, F denotes for the size of the frame (chroma part only)
