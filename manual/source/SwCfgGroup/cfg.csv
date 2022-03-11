@@ -70,14 +70,14 @@ r_c,r_cDatThrRatiIntra,close,6,/,int,0,/,/,1 2 3 6 9 15,threshold of RATI based 
 r_c,r_cDatDltRatiIntra,close,7,/,int,0,51,/,0 1 2 3 6 9 15,delta QP  of RATI based frame-level intra RC,?,?,?
 r_c,r_cDatThrRatiInter,close,6,/,int,0,/,/,2 4 6 12 18 30,threshold of RATI based frame-level inter RC (unit: 6*log2),?,?,?
 r_c,r_cDatDltRatiInter,close,7,/,int,0,51,/,0 1 2 3 6 9 15,delta QP  of RATI based frame-level inter RC,?,?,?
-r_c,r_cDatSclSmthIntra,close,1,/,double,0,0.999023438,10,0.25,smooth scaler of SMTH based LCU-level intra RC (could be taken as the reciprocal of LCU number to be smoothed),Yes,same with H265-main,?
-r_c,r_cDatSclSmthInter,close,1,/,double,0,0.999023438,10,0.25,smooth scaler of SMTH based LCU-level inter RC (could be taken as the reciprocal of LCU number to be smoothed),Yes,same with H265-main,?
-r_c,r_cDatThrSmthIntra,close,1,/,int,0,/,/,1000,(minimum) threshold of SMTH based LCU-level intra RC,Yes,same with H265-main,?
-r_c,r_cDatThrSmthInter,close,1,/,int,0,/,/,1000,(minimum) threshold of SMTH based LCU-level inter RC,Yes,same with H265-main,?
-r_c,r_cDatDltSmthIntra,close,1,/,int,0,7,/,1,(maximum) delta QP of SMTH based LCU-level intra RC,Yes,same with H265-main,?
-r_c,r_cDatDltSmthInter,close,1,/,int,0,7,/,1,(maximum) delta QP of SMTH based LCU-level inter RC,Yes,same with H265-main,?
-r_c,r_cDatPrmSmthIntra,close,3,/,double,/,/,/,-64.62 0.1546 89.08,parameter of SMTH based LCU-level intra RC,Yes,same with H265-main,?
-r_c,r_cDatPrmSmthInter,close,3,/,double,/,/,/,-253.4 0.02585 269.5,parameter of SMTH based LCU-level inter RC,Yes,same with H265-main,?
+r_c,r_cDatSclSmthIntra,close,1,/,int,0,1023,/,13,smooth scaler of SMTH based LCU-level intra RC (LCU number to be smoothed),Yes,same with H265-main,?
+r_c,r_cDatSclSmthInter,close,1,/,int,0,1023,/,13,smooth scaler of SMTH based LCU-level inter RC (LCU number to be smoothed),Yes,same with H265-main,?
+r_c,r_cDatThrSmthIntra,close,1,/,int,0,/,/,1000,out of date (will be removed later),/,same with H265-main,same with H265-main
+r_c,r_cDatThrSmthInter,close,1,/,int,0,/,/,1000,out of date (will be removed later),/,same with H265-main,same with H265-main
+r_c,r_cDatDltSmthIntra,close,1,/,int,0,7,/,1,out of date (will be removed later),/,same with H265-main,same with H265-main
+r_c,r_cDatDltSmthInter,close,1,/,int,0,7,/,1,out of date (will be removed later),/,same with H265-main,same with H265-main
+r_c,r_cDatPrmSmthIntra,close,3,/,double,/,/,/,-64.62 0.1546 89.08,out of date (will be removed later),/,same with H265-main,same with H265-main
+r_c,r_cDatPrmSmthInter,close,3,/,double,/,/,/,-253.4 0.02585 269.5,out of date (will be removed later),/,same with H265-main,same with H265-main
 r_c,r_cDatThrSadrIntra,close,6,/,int,0,32767,/,1854 2363 5019 14161 18900 27758,threshold of SADR based LCU-level intra RC,?,same with H265-main,?
 r_c,r_cDatDltSadrIntra,close,7,/,int,-16,15,/,0 0 0 0 1 1 1,delta QP  of SADR based LCU-level intra RC,?,same with H265-main,?
 r_c,r_cDatThrSadrInter,close,6,/,int,0,32767,/,1854 2363 5019 14161 18900 27758,threshold of SADR based LCU-level inter RC,?,same with H265-main,?
