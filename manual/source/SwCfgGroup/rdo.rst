@@ -12,5 +12,8 @@ Different encoding levels have different methods for calculating distortion cost
 For example, When the coding level is 0, the DCst is the sum of squared Error, 
 and the RCst is calculated by the fitting method. And some parameters related with RCst fitting is in the table below.
 
+.. table::
+   :align: left
+   :widths: auto
 
-.. include:: rdo_sub.rst
+   .. include:: rdo_sub.rst

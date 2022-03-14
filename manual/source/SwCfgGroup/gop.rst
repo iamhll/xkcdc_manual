@@ -26,4 +26,8 @@ For example, the datPoc of P frame is 4, and its deltaPoc is -4, because it refe
 Besides, we can also set the deltaQp
 
 
-.. include:: gop_sub.rst
+.. table::
+   :align: left
+   :widths: auto
+
+   .. include:: gop_sub.rst

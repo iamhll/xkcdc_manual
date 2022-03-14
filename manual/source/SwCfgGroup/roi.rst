@@ -10,10 +10,11 @@ according to different application scenarios.
 
 Example of ROI with default settings is shown below.
 
-
 .. image:: roi.png
     :width: 10%
 
+.. table::
+   :align: left
+   :widths: auto
 
-
-.. include:: roi_sub.rst
+   .. include:: roi_sub.rst

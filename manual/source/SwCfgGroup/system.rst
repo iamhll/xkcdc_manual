@@ -3,4 +3,8 @@ System
 
 Specify the input file, coding level and output log of the codec.
 
-.. include:: system_sub.rst
+.. table::
+   :align: left
+   :widths: auto
+
+   .. include:: system_sub.rst

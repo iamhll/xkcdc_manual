@@ -12,4 +12,8 @@ while their ``imeEnmSlp`` (tanθ) are 1, 2, infinite, respectively.
 .. image:: ime_pattern.png
     :width: 40%
 
-.. include:: ime_sub.rst
+.. table::
+   :align: left
+   :widths: auto
+
+   .. include:: ime_sub.rst

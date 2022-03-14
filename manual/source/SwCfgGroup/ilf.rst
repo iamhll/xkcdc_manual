@@ -14,7 +14,7 @@ and then adding the offset to each sample of the category.
 Rate-distortion optimization is adopted to determine sample adaptive offset mode at the encoder side.
 
 .. table::
-      :align: left
-      :widths: auto
+   :align: left
+   :widths: auto
 
-      .. include::  ilf_sub.rst
+   .. include::  ilf_sub.rst

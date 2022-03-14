@@ -221,7 +221,7 @@
             . " " . ("=" x ($sizStrDatMin      + 2))
             . " " . ("=" x ($sizStrDatMax      + 2))
             . " " . ("=" x ($sizStrDatPrc      + 2))
-            . " " . ("=" x ($sizStrDatDef      + 2))
+           #. " " . ("=" x ($sizStrDatDef      + 2))
             . " " . ("=" x ($sizStrDescription + 2))
             . " " . ("=" x ($sizStrFlgH265Main + 2))
             . " " . ("=" x ($sizStrFlgH265Low  + 2))
@@ -236,7 +236,7 @@
             . "  %-${sizStrDatMin}s "
             . "  %-${sizStrDatMax}s "
             . "  %-${sizStrDatPrc}s "
-            . "  %-${sizStrDatDef}s "
+           #. "  %-${sizStrDatDef}s "
             . "  %-${sizStrDescription}s "
             . "  %-${sizStrFlgH265Main}s "
             . "  %-${sizStrFlgH265Low}s "
@@ -275,7 +275,7 @@
                         ,$datMin     [0]
                         ,$datMax     [0]
                         ,$datPrc     [0]
-                        ,$datDef     [0]
+                       #,$datDef     [0]
                         ,$description
                         ,$flgH265Main[0]
                         ,$flgH265Low [0]
@@ -296,7 +296,7 @@
                     ,$datMin     [$idx]
                     ,$datMax     [$idx]
                     ,$datPrc     [$idx]
-                    ,$datDef     [$idx]
+                   #,$datDef     [$idx]
                     ,$description
                     ,$flgH265Main[$idx]
                     ,$flgH265Low [$idx]

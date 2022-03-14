@@ -3,4 +3,8 @@ Dump
 
 Dump test vector for hardware simulation.
 
-.. include:: dump_sub.rst
+.. table::
+   :align: left
+   :widths: auto
+
+   .. include:: dump_sub.rst

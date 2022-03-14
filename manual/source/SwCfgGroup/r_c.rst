@@ -9,4 +9,8 @@ The LCU-level algorithms consist of sum of absolute derivation (SADR), sum of ab
 
 The algorithm works as following: when SADR/SATD/SAMV is less than the threshold n, the delta QP n is used. Otherwise, continue to query the threshold n+1.
 
-.. include:: r_c_sub.rst
+.. table::
+   :align: left
+   :widths: auto
+
+   .. include:: r_c_sub.rst
