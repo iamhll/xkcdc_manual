@@ -185,43 +185,33 @@ Recommended Configuration
       :align: left
       :widths: auto
 
-      ==========  ====================== ========== ======= ======== ======= ============== =========== ==================
-       Level       Configuration number   Center     Width   Height   Slope   Downsampling   (Shape)     Number of cycles
-      ==========  ====================== ========== ======= ======== ======= ============== =========== ==================
-       H265-main   A                      CMD(0,0)   36      18       0.5     1              (diamond)   834
-       \                                  LCU        10      10       1       0              (diamond)
-       \           Default                CMD(0,0)   40      20       0.5     1              (diamond)   916
-       \                                  LCU        10      10       1       0              (diamond)
-       \           B                      CMD(0,0)   40      20       1       1              (hexagon)   1196
-       \                                  LCU        10      10       2       0              (hexagon)
-       \           C                      CMD(0,0)   48      24       1       1              (hexagon)   1604
-       \                                  LCU        12      12       2       0              (hexagon)
-       \           D                      CMD(0,0)   48      24       0.5     1              (hexagon)   1899
-       \                                  QLCU0      10      10       1       0              (diamond)
-       \                                  QLCU1      10      10       1       0              (diamond)
-       \                                  QLCU2      10      10       1       0              (diamond)
-       \                                  QLCU3      10      10       1       0              (diamond)
-       \           E                      CMD(0,0)   48      24       0.5     1              (hexagon)   2374
-       \                                  LCU        10      10       3(inf)  0              (square )
-       \                                  QLCU0      10      10       1       0              (diamond)
-       \                                  QLCU1      10      10       1       0              (diamond)
-       \                                  QLCU2      10      10       1       0              (diamond)
-       \                                  QLCU3      10      10       1       0              (diamond)
-       H265-low    A                      CMD(0,0)   20      10       0.5     0              (diamond)   794
-       \                                  LCU        12      6        1       0              (diamond)
-       \           B                      CMD(0,0)   32      16       0.5     0              (hexagon)   1098
-       \                                  QLCU0      10      10       1       0              (diamond)
-       \                                  QLCU1      10      10       1       0              (diamond)
-       \                                  QLCU2      10      10       1       0              (diamond)
-       \                                  QLCU3      10      10       1       0              (diamond)
-       \           C                      CMD(0,0)   32      16       0.5     0              (hexagon)   1308
-       \                                  LCU        10      10       3(inf)  0              (square )
-       \                                  QLCU0      10      10       1       0              (diamond)
-       \                                  QLCU1      10      10       1       0              (diamond)
-       \                                  QLCU2      10      10       1       0              (diamond)
-       \                                  QLCU3      10      10       1       0              (diamond)
-       \           Default                CMD(0,0)   28      12       3(inf)  0              (square )   1518
-      ==========  ====================== ========== ======= ======== ======= ============== =========== ==================
+      ==========  ====================== ========== ======= ======== ========= ============== ========= ==================
+       Level       Configuration number   Center     Width   Height   Slope     Downsampling   Shape     Number of cycles
+      ==========  ====================== ========== ======= ======== ========= ============== ========= ==================
+       H265-main   A                      CMD(0,0)   36      18       0 (0.5)   1              diamond   834
+       \                                  LCU        10      10       1 (1)     0              diamond
+       \           Default                CMD(0,0)   40      20       0 (0.5)   1              diamond   916
+       \                                  LCU        10      10       1 (1)     0              diamond
+       \           B                      CMD(0,0)   40      20       1 (1)     1              hexagon   1196
+       \                                  LCU        10      10       2 (2)     0              hexagon
+       \           C                      CMD(0,0)   48      24       1 (1)     1              hexagon   1604
+       \                                  LCU        12      12       2 (2)     0              hexagon
+       \           D                      CMD(0,0)   48      24       0 (0.5)   1              hexagon   1899
+       \                                  QLCU0      10      10       1 (1)     0              diamond
+       \                                  QLCU1      10      10       1 (1)     0              diamond
+       \                                  QLCU2      10      10       1 (1)     0              diamond
+       \                                  QLCU3      10      10       1 (1)     0              diamond
+       \           E                      CMD(0,0)   48      24       0 (0.5)   1              hexagon   2374
+       \                                  LCU        10      10       3 (inf)   0              square
+       \                                  QLCU0      10      10       1 (1)     0              diamond
+       \                                  QLCU1      10      10       1 (1)     0              diamond
+       \                                  QLCU2      10      10       1 (1)     0              diamond
+       \                                  QLCU3      10      10       1 (1)     0              diamond
+       H265-low    A                      CMD(0,0)   20      10       0 (0.5)   0              diamond   526
+       \           B                      CMD(0,0)   28      12       0 (0.5)   0              hexagon   906
+       \           C                      CMD(0,0)   28      12       2 (2)     0              hexagon   1362
+       \           Default                CMD(0,0)   28      12       3 (inf)   0              square    1518
+      ==========  ====================== ========== ======= ======== ========= ============== ========= ==================
 
 
 - **FME**
